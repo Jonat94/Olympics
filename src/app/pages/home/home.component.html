@@ -1,17 +1,18 @@
-<h2>Olympic games app</h2>
-<hr />
 <div>
-    <div *ngFor="let count of countries">
-        <a [routerLink]="'./country/' + count.id"> {{ count.country }} </a>
-        <div *ngFor="let part of count.participations">
-            {{part.city}}
-        </div>
-    </div>
-    <div>
-        number of countries {{olympicService.getNumberOfCountries()}}
-    </div>
-    <div>
-        number of games {{olympicService.getNumberOfGames()}}
-    </div>
+    Medals per Country
+</div>
+<div>
+    number of countries {{olympicService.getNumberOfCountries()}}
+</div>
+<div>
+    number of games {{olympicService.getNumberOfGames()}}
+</div>
 
-    <app-pie-chart [countries]="countries"></app-pie-chart>
+<app-pie-chart [countries]="countries"></app-pie-chart>
+
+<div *ngFor="let count of countries">
+    <a [routerLink]="'./country/' + count.id"> {{ count.country }} </a>
+    <div *ngFor="let part of count.participations">
+        {{part.city}}
+    </div>
+</div>

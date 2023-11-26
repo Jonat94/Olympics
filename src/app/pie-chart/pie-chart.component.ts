@@ -19,20 +19,20 @@ export class PieChartComponent implements OnInit {
   }
   constructor(private router: Router, private olympicService: OlympicService) {}
 
+  public colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+  };
+
   @Input() countries!: Country[];
 
   onSelect(data: any): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
 
     let obj = JSON.parse(JSON.stringify(data));
-    console.log(obj);
+    //console.log(obj);
     console.log(this.countries);
     console.log(this.dataset);
-    console.log(this.olympicService.getCountryById(1));
-    console.log(this.olympicService.getIdByCountry('Italy'));
-    console.log(this.olympicService.getIdByCountry(obj.name));
-    console.log(this.olympicService.getNumberOfCountries());
-    console.log(this.olympicService.getNumberOfGames());
+
     this.router.navigate([
       `country/${this.olympicService.getIdByCountry(obj.name)}`,
     ]);
