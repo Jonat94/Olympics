@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   public olympics$: Observable<Country[] | null> = of(null);
   public linkUrl: string = '/toto';
-  constructor(private olympicService: OlympicService) {}
+  constructor(public olympicService: OlympicService) {}
 
   ngOnInit(): void {
     this.olympicService.getOlympics().subscribe((value) => {

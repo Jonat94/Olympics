@@ -35,4 +35,31 @@ export class OlympicService {
   getOlympics() {
     return this.olympics$.asObservable();
   }
+
+  getCountryById(argId: number) {
+    for (let country of this.countries)
+      if (country.id == argId) return country.country;
+    return null;
+  }
+
+  getIdByCountry(ctryName: String) {
+    for (let country of this.countries)
+      if (country.country == ctryName) return country.id;
+    return null;
+  }
+
+  getNumberOfGames() {
+    let games: number[] = [];
+    for (let country of this.countries)
+      for (let participation of country.participations) {
+        //console.log(participation.year);
+        if (!games.includes(participation.year)) games.push(participation.year);
+      }
+
+    return games.length;
+  }
+
+  getNumberOfCountries() {
+    return this.countries.length;
+  }
 }

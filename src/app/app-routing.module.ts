@@ -8,10 +8,10 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
   },
-  // {
-  //   path: 'country/:id',
-  //   component: SingleCountryComponent,
-  // },
+  {
+    path: 'country/:id',
+    component: HomeComponent,
+  },
   // {
   //   path: '**', // wildcard
   //   component: NotFoundComponent,
