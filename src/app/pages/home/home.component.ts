@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.olympicService.getOlympics().subscribe((value) => {
       this.countries = value;
-      if (value.length != 0) console.log('coucou' + value);
+      if (value.length != 0) console.log('coucou' + value); //test si le conteuen de l'observable est un tableau vide
     });
   }
 }

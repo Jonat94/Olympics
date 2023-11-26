@@ -1,11 +1,11 @@
 <h2>Olympic games app</h2>
 <hr />
-
-<div *ngFor="let count of countries">
-    <a [routerLink]="'./country/' + count.id"> {{ count.country }} </a>
-    <div *ngFor="let part of count.participations">
-        {{part.city}}
+<div>
+    <div *ngFor="let count of countries">
+        <a [routerLink]="'./country/' + count.id"> {{ count.country }} </a>
+        <div *ngFor="let part of count.participations">
+            {{part.city}}
+        </div>
     </div>
-</div>
 
-<app-pie-chart></app-pie-chart>
+    <app-pie-chart [countries]="countries"></app-pie-chart>
