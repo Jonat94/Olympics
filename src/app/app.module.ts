@@ -4,13 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HomeComponent } from './pages/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, TestComponent, PieChartComponent],
+  declarations: [AppComponent, HomeComponent, PieChartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
