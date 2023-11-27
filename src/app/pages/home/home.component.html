@@ -1,4 +1,4 @@
-<div class="h20 ">
+<div *ngIf="countries.length!=0" class="h20 ">
     <div class="text-center align-middle my-5">
         Medals per Country
     </div>
@@ -18,6 +18,16 @@
 
 </div>
 <app-pie-chart *ngIf="countries.length!=0" [countries]="countries"></app-pie-chart>
+
+
+<div *ngIf="countries.length==0" class="text-center align-middle">
+    <h1>Loading</h1>
+</div>
+
+
+
+
+
 
 <!-- <div *ngFor="let count of countries">
         <a [routerLink]="'./country/' + count.id"> {{ count.country }} </a>

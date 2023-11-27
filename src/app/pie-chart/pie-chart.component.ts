@@ -19,9 +19,9 @@ export class PieChartComponent implements OnInit {
   }
   constructor(private router: Router, private olympicService: OlympicService) {}
 
-  public colorScheme = {
+  /*public colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
-  };
+  };*/
 
   @Input() countries!: Country[];
 
