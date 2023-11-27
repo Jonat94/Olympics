@@ -11,6 +11,7 @@ export class OlympicService {
   private olympics$ = new BehaviorSubject<Country[]>([]);
   public countries: Country[] = [];
   private dataLoaded: boolean = false;
+  public loaded$ = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
@@ -20,7 +21,7 @@ export class OlympicService {
         this.olympics$.next(value);
         this.countries = value;
         // console.log('ttt' + this.countries);
-        //this.dataLoaded = true;
+        this.loaded$.next(true);
       }),
       catchError((error, caught) => {
         // TODO: improve error handling
