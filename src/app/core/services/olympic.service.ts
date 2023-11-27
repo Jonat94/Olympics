@@ -7,24 +7,11 @@ import { Country } from '../models/Olympic';
   providedIn: 'root',
 })
 export class OlympicService {
-  getNumberOfAthletesById(id: number): Number {
-    return this.countries[id - 1].participations.reduce(
-      (acc, cur) => acc + cur.athleteCount,
-      0
-    );
-  }
-  getNumberOfMedalsById(id: number): Number {
-    console.log(this.dataset);
-    return this.dataset[id - 1].value;
-  }
-  getNumberOfEntriesById(id: number): Number {
-    return this.countries[id - 1].participations.length;
-  }
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Country[]>([]);
-  public countries: Country[] = [];
-  private dataLoaded: boolean = false;
-  public loaded$ = new BehaviorSubject<boolean>(false);
+  private countries: Country[] = [];
+  private loaded$ = new BehaviorSubject<boolean>(false);
+  public dataset: { name: String; value: number }[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -33,7 +20,6 @@ export class OlympicService {
       tap((value) => {
         this.olympics$.next(value);
         this.countries = value;
-        // console.log('ttt' + this.countries);
         this.loaded$.next(true);
         this.setupDataset();
       }),
@@ -45,6 +31,21 @@ export class OlympicService {
         return caught;
       })
     );
+  }
+
+  public setupDataset() {
+    let medalsCount = [];
+    for (let c of this.countries) {
+      let obj: { name: String; value: number };
+      obj = { name: '', value: 0 };
+      obj.value = c.participations.reduce(
+        (acc, cur) => acc + cur.medalsCount,
+        0
+      );
+      obj.name = c.country;
+      medalsCount.push(obj);
+    }
+    this.dataset = medalsCount;
   }
 
   getOlympics() {
@@ -67,35 +68,28 @@ export class OlympicService {
     let games: number[] = [];
     for (let country of this.countries)
       for (let participation of country.participations) {
-        //console.log(participation.year);
         if (!games.includes(participation.year)) games.push(participation.year);
       }
-    // console.log('aaaaaa' + games.length);
     return games.length;
   }
 
-  getNumberOfCountries() {
-    return this.countries.length;
-  }
-
-  //public medalsCount: { name: String; value: number }[] = [];
-  public dataset: { name: String; value: number }[] = [];
-
-  public setupDataset() {
-    let medalsCount = [];
-    for (let c of this.countries) {
-      let obj: { name: String; value: number };
-      obj = { name: '', value: 0 };
-      obj.value = c.participations.reduce(
-        (acc, cur) => acc + cur.medalsCount,
-        0
-      );
-      obj.name = c.country;
-      medalsCount.push(obj);
-    }
-    this.dataset = medalsCount;
-  }
   getTotalMedals() {
     return this.dataset.reduce((acc, cur) => acc + cur.value, 0);
+  }
+
+  getNumberOfAthletesById(id: number): Number {
+    return this.countries[id - 1].participations.reduce(
+      (acc, cur) => acc + cur.athleteCount,
+      0
+    );
+  }
+  getNumberOfMedalsById(id: number): Number {
+    return this.dataset[id - 1].value;
+  }
+  getNumberOfEntriesById(id: number): Number {
+    return this.countries[id - 1].participations.length;
+  }
+  getNumberOfCountries() {
+    return this.countries.length;
   }
 }

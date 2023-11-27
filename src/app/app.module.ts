@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { CountryComponent } from './pages/country/country.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';

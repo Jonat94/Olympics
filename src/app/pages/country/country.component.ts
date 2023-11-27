@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OlympicService } from '../../core/services/olympic.service';
 import { ActivatedRoute } from '@angular/router';
-import { Country } from '../../core/models/Olympic';
 
 @Component({
   selector: 'app-country',
@@ -17,13 +16,12 @@ export class CountryComponent implements OnInit {
     private olympicService: OlympicService
   ) {}
 
-  getOlympicService() {
+  getOlympicService(): OlympicService {
     return this.olympicService;
   }
   ngOnInit(): void {
     this.param = +this.route.snapshot.params['id'];
     this.olympicService.getOlympics().subscribe((value) => {
-      //this.countries = value;
       if (value.length != 0) this.loaded = true;
     });
   }
