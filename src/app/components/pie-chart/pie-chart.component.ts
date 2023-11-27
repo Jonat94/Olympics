@@ -10,23 +10,18 @@ import { Router } from '@angular/router';
   styleUrl: './pie-chart.component.scss',
 })
 export class PieChartComponent implements OnInit {
-  @Input() countries!: Country[];
-
   constructor(private router: Router, private olympicService: OlympicService) {}
 
   ngOnInit(): void {
-    this.olympicService.getOlympics().subscribe((value) => {
-      this.countries = value;
-    });
+    this.olympicService.getOlympics().subscribe();
   }
 
   public getOlympicService() {
     return this.olympicService;
   }
-
+  //A commenter
   onSelect(data: any): void {
     let obj = JSON.parse(JSON.stringify(data));
-    console.log(this.countries);
     this.router.navigate([
       `country/${this.olympicService.getIdByCountry(obj.name)}`,
     ]);
