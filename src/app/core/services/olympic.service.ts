@@ -22,6 +22,7 @@ export class OlympicService {
         this.countries = value;
         // console.log('ttt' + this.countries);
         this.loaded$.next(true);
+        this.setupDataset();
       }),
       catchError((error, caught) => {
         // TODO: improve error handling
@@ -56,11 +57,32 @@ export class OlympicService {
         //console.log(participation.year);
         if (!games.includes(participation.year)) games.push(participation.year);
       }
-    console.log(games.length);
+    // console.log('aaaaaa' + games.length);
     return games.length;
   }
 
   getNumberOfCountries() {
     return this.countries.length;
+  }
+
+  //public medalsCount: { name: String; value: number }[] = [];
+  public dataset: { name: String; value: number }[] = [];
+
+  public setupDataset() {
+    let medalsCount = [];
+    for (let c of this.countries) {
+      let obj: { name: String; value: number };
+      obj = { name: '', value: 0 };
+      obj.value = c.participations.reduce(
+        (acc, cur) => acc + cur.medalsCount,
+        0
+      );
+      obj.name = c.country;
+      medalsCount.push(obj);
+    }
+    this.dataset = medalsCount;
+  }
+  getTotalMedals() {
+    return this.dataset.reduce((acc, cur) => acc + cur.value, 0);
   }
 }

@@ -1,13 +1,13 @@
 <div *ngIf="countries.length!=0" class="h20 ">
     <div class="text-center align-middle my-5">
-        Medals per Country
+        {{(getOlympicService().getTotalMedals()/getOlympicService().getNumberOfCountries())}} Medals per Country
     </div>
 </div>
 
 <div *ngIf="countries.length!=0" class=" max-w-2 flex justify-center ">
     <!-- <div class="border-2 border-teal-500  w-40"></div> -->
 
-    <app-card [title]="'Number of games'" [medals]="getOlympicService().getNumberOfGames()"
+    <app-card [title]="'Number of Olympics'" [medals]="getOlympicService().getNumberOfGames()"
         *ngIf="countries.length!=0"></app-card>
     <app-card [title]="'Number of countries'" [medals]="getOlympicService().getNumberOfCountries()"
         *ngIf="countries.length!=0"></app-card>
@@ -19,8 +19,9 @@
 
 
 </div>
+<!-- <div class=" max-w-2 flex justify-center w-3 "> -->
 <app-pie-chart *ngIf="countries.length!=0" [countries]="countries"></app-pie-chart>
-
+<!-- </div> -->
 
 <div *ngIf="countries.length==0" class="text-center align-middle">
     <h1>Loading</h1>
