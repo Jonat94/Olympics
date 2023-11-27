@@ -7,6 +7,19 @@ import { Country } from '../models/Olympic';
   providedIn: 'root',
 })
 export class OlympicService {
+  getNumberOfAthletesById(id: number): Number {
+    return this.countries[id - 1].participations.reduce(
+      (acc, cur) => acc + cur.athleteCount,
+      0
+    );
+  }
+  getNumberOfMedalsById(id: number): Number {
+    console.log(this.dataset);
+    return this.dataset[id - 1].value;
+  }
+  getNumberOfEntriesById(id: number): Number {
+    return this.countries[id - 1].participations.length;
+  }
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Country[]>([]);
   public countries: Country[] = [];

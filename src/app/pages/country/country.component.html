@@ -3,19 +3,20 @@
         {{ getOlympicService().getCountryById(param) }}
     </div>
 </div>
+
+
 <div *ngIf="loaded==true" class=" max-w-2 flex justify-center ">
     <!-- <div class="border-2 border-teal-500  w-40"></div> -->
 
-
-    <app-card [title]="'Number of entries'" [medals]="getOlympicService().getNumberOfCountries()"
+    <app-card [title]="'Number of entries'" [medals]="getOlympicService().getNumberOfEntriesById(param)"
         *ngIf="loaded==true"></app-card>
-    <app-card [title]="'Total number of medals'" [medals]="getOlympicService().getNumberOfCountries()"
+    <app-card [title]="'Total number of medals'" [medals]="getOlympicService().getNumberOfMedalsById(param)"
         *ngIf="loaded==true"></app-card>
-    <app-card [title]="'Total number of athletes'" [medals]="getOlympicService().getNumberOfCountries()"
+    <app-card [title]="'Total number of athletes'" [medals]="getOlympicService().getNumberOfAthletesById(param)"
         *ngIf="loaded==true"></app-card>
-
-
 </div>
+
+
 <div *ngIf="loaded==true" class="flex justify-center m-10">
     <app-line-chart></app-line-chart>
 </div>
