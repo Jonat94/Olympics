@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { OlympicService } from '../../core/services/olympic.service';
 
 @Component({
   selector: 'app-line-chart',
@@ -6,26 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './line-chart.component.scss',
 })
 export class LineChartComponent implements OnInit {
+  constructor(private olympicService: OlympicService) {}
+  @Input() dataId?: number;
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    //  this.olympicService.getOlympics().subscribe();
   }
-  public dataset = [
-    {
-      name: 'Germany',
-      series: [
-        {
-          name: '1990',
-          value: 62000000,
-        },
-        {
-          name: '2010',
-          value: 73000000,
-        },
-        {
-          name: '2011',
-          value: 89400000,
-        },
-      ],
-    },
-  ];
+
+  public getOlympicService() {
+    return this.olympicService;
+  }
 }

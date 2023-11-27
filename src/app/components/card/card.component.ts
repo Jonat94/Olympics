@@ -7,9 +7,8 @@ import { OlympicService } from '../../core/services/olympic.service';
   styleUrl: './card.component.scss',
 })
 export class CardComponent implements OnInit {
-  @Input() public medals: Number = 0;
+  @Input() public data: Number = 0;
   @Input() public title: String = '';
-  public loaded: boolean = false;
   constructor(private olympicService: OlympicService) {}
 
   getOlympicService() {
@@ -17,8 +16,6 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.olympicService.getOlympics().subscribe((value) => {
-      if (value.length != 0) this.loaded = true;
-    });
+    // this.olympicService.getOlympics().subscribe();
   }
 }

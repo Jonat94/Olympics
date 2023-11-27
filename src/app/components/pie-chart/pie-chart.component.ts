@@ -13,15 +13,18 @@ export class PieChartComponent implements OnInit {
   constructor(private router: Router, private olympicService: OlympicService) {}
 
   ngOnInit(): void {
-    this.olympicService.getOlympics().subscribe();
+    //this.olympicService.getOlympics().subscribe();
   }
 
   public getOlympicService() {
     return this.olympicService;
   }
   //A commenter
-  onSelect(data: any): void {
-    let obj = JSON.parse(JSON.stringify(data));
+  onSelect($event: any): void {
+    let obj = JSON.parse(JSON.stringify($event));
+
+    //this.olympicService.buildLineChartData(2);
+
     this.router.navigate([
       `country/${this.olympicService.getIdByCountry(obj.name)}`,
     ]);

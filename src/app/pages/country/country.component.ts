@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CountryComponent implements OnInit {
   public param!: number;
-  public loaded: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,8 +20,5 @@ export class CountryComponent implements OnInit {
   }
   ngOnInit(): void {
     this.param = +this.route.snapshot.params['id'];
-    this.olympicService.getOlympics().subscribe((value) => {
-      if (value.length != 0) this.loaded = true;
-    });
   }
 }

@@ -1,20 +1,20 @@
-<div *ngIf="loaded==true" class="h20 ">
-    <div class="text-center align-middle my-5 py-8 text-xl font-semibold">
+<div *ngIf="getOlympicService().isLoaded()==true" class="h20 ">
+    <div class="text-center text-slate-950   align-middle my-5 py-6 text-xl font-semibold">
         {{ getOlympicService().getCountryById(param) }}
     </div>
 </div>
-<div *ngIf="loaded==true" class=" max-w-2 flex justify-center ">
-    <app-card [title]="'Number of entries'" [medals]="getOlympicService().getNumberOfEntriesById(param)"
-        *ngIf="loaded==true"></app-card>
-    <app-card [title]="'Total number of medals'" [medals]="getOlympicService().getNumberOfMedalsById(param)"
-        *ngIf="loaded==true"></app-card>
-    <app-card [title]="'Total number of athletes'" [medals]="getOlympicService().getNumberOfAthletesById(param)"
-        *ngIf="loaded==true"></app-card>
+<div *ngIf="getOlympicService().isLoaded()==true" class=" max-w-2 flex justify-center ">
+    <app-card [title]="'Number of entries'" [data]="getOlympicService().getNumberOfEntriesById(param)"
+        *ngIf="getOlympicService().isLoaded()==true"></app-card>
+    <app-card [title]="'Total number of medals'" [data]="getOlympicService().getNumberOfMedalsById(param)"
+        *ngIf="getOlympicService().isLoaded()==true"></app-card>
+    <app-card [title]="'Total number of athletes'" [data]="getOlympicService().getNumberOfAthletesById(param)"
+        *ngIf="getOlympicService().isLoaded()==true"></app-card>
 </div>
-<div *ngIf="loaded==true" class="flex justify-center m-10">
-    <app-line-chart></app-line-chart>
+<div *ngIf="getOlympicService().isLoaded()==true" class="flex justify-center m-10">
+    <app-line-chart [dataId]="param"></app-line-chart>
 </div>
-<div *ngIf="loaded==false" class="text-center align-middle">
+<div *ngIf="getOlympicService().isLoaded()==true" class="text-center align-middle">
     <h1>Loading</h1>
 </div>
 <div class="flex justify-center ">

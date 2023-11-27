@@ -1,18 +1,18 @@
-<div *ngIf="countries.length!=0" class="h20 ">
-    <div class="text-center align-middle my-5 py-8 text-xl font-semibold">
+<div *ngIf="getOlympicService().isLoaded()==true" class="h20 ">
+    <div class="text-center text-slate-950 align-middle my-5 py-6 text-xl font-semibold">
         {{(getOlympicService().getTotalMedals()/getOlympicService().getNumberOfCountries())}} Medals per Country
     </div>
 </div>
 
-<div *ngIf="countries.length!=0" class=" max-w-2 flex justify-center ">
+<div *ngIf="getOlympicService().isLoaded()==true" class=" max-w-2 flex justify-center ">
 
-    <app-card [title]="'Number of Olympics'" [medals]="getOlympicService().getNumberOfGames()"
-        *ngIf="countries.length!=0"></app-card>
-    <app-card [title]="'Number of countries'" [medals]="getOlympicService().getNumberOfCountries()"
-        *ngIf="countries.length!=0"></app-card>
+    <app-card [title]="'Number of Olympics'" [data]="getOlympicService().getNumberOfGames()"
+        *ngIf="getOlympicService().isLoaded()==true"></app-card>
+    <app-card [title]="'Number of countries'" [data]="getOlympicService().getNumberOfCountries()"
+        *ngIf="getOlympicService().isLoaded()==true"></app-card>
 
 </div>
-<app-pie-chart *ngIf="countries.length!=0" [countries]="countries"></app-pie-chart>
-<div *ngIf="countries.length==0" class="text-center align-middle">
+<app-pie-chart *ngIf="getOlympicService().getCountries().length!=0"></app-pie-chart>
+<div *ngIf="getOlympicService().isLoaded()==false" class="text-center align-middle">
     <h1>Loading</h1>
 </div>
