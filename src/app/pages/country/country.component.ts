@@ -14,8 +14,12 @@ export class CountryComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public olympicService: OlympicService
+    private olympicService: OlympicService
   ) {}
+
+  getOlympicService() {
+    return this.olympicService;
+  }
   ngOnInit(): void {
     this.param = +this.route.snapshot.params['id'];
     this.olympicService.getOlympics().subscribe((value) => {

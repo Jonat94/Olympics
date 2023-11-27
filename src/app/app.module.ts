@@ -10,6 +10,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { CountryComponent } from './pages/country/country.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
     CountryComponent,
     NotFoundComponent,
     LineChartComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,

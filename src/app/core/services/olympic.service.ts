@@ -49,14 +49,14 @@ export class OlympicService {
     return null;
   }
 
-  getNumberOfGames() {
+  public getNumberOfGames() {
     let games: number[] = [];
     for (let country of this.countries)
       for (let participation of country.participations) {
         //console.log(participation.year);
         if (!games.includes(participation.year)) games.push(participation.year);
       }
-
+    console.log(games.length);
     return games.length;
   }
 
