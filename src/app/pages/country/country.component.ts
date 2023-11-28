@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './country.component.scss',
 })
 export class CountryComponent implements OnInit {
-  public param!: number;
+  public countryId!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,6 +19,6 @@ export class CountryComponent implements OnInit {
     return this.olympicService;
   }
   ngOnInit(): void {
-    this.param = +this.route.snapshot.params['id'];
+    this.countryId = +this.route.snapshot.params['id'];
   }
 }

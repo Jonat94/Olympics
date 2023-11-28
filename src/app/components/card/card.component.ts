@@ -6,16 +6,12 @@ import { OlympicService } from '../../core/services/olympic.service';
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @Input() public data: Number = 0;
   @Input() public title: String = '';
   constructor(private olympicService: OlympicService) {}
 
   getOlympicService() {
     return this.olympicService;
-  }
-
-  ngOnInit(): void {
-    // this.olympicService.getOlympics().subscribe();
   }
 }

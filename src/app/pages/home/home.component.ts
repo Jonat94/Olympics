@@ -6,15 +6,9 @@ import { OlympicService } from '../../core/services/olympic.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   constructor(private olympicService: OlympicService) {}
   getOlympicService() {
     return this.olympicService;
-  }
-
-  //A commenter
-  ngOnInit(): void {
-    console.log('toto');
-    this.olympicService.getOlympics().subscribe();
   }
 }

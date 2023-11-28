@@ -1,18 +1,18 @@
 <div *ngIf="getOlympicService().isLoaded()==true" class="h20 ">
     <div class="text-center text-slate-950   align-middle my-5 py-6 text-xl font-semibold">
-        {{ getOlympicService().getCountryById(param) }}
+        {{ getOlympicService().getCountryById(countryId) }}
     </div>
 </div>
 <div *ngIf="getOlympicService().isLoaded()==true" class=" max-w-2 flex justify-center ">
-    <app-card [title]="'Number of entries'" [data]="getOlympicService().getNumberOfEntriesById(param)"
+    <app-card [title]="'Number of entries'" [data]="getOlympicService().getNumberOfEntriesById(countryId)"
         *ngIf="getOlympicService().isLoaded()==true"></app-card>
-    <app-card [title]="'Total number of medals'" [data]="getOlympicService().getNumberOfMedalsById(param)"
+    <app-card [title]="'Total number of medals'" [data]="getOlympicService().getNumberOfMedalsById(countryId)"
         *ngIf="getOlympicService().isLoaded()==true"></app-card>
-    <app-card [title]="'Total number of athletes'" [data]="getOlympicService().getNumberOfAthletesById(param)"
+    <app-card [title]="'Total number of athletes'" [data]="getOlympicService().getNumberOfAthletesById(countryId)"
         *ngIf="getOlympicService().isLoaded()==true"></app-card>
 </div>
 <div *ngIf="getOlympicService().isLoaded()==true" class="flex justify-center m-10">
-    <app-line-chart [dataId]="param"></app-line-chart>
+    <app-line-chart [dataId]="countryId"></app-line-chart>
 </div>
 <div *ngIf="getOlympicService().isLoaded()==false" class="text-center align-middle">
     <h1>Loading</h1>

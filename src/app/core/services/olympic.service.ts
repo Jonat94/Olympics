@@ -28,7 +28,6 @@ export class OlympicService {
         this.loaded$.next(true);
         this.pieChartData = this.buildPieChartData();
         this.loaded = true;
-        //this.lineChartData = this.buildLineChartData(2);
       }),
       catchError((error, caught) => {
         // TODO: improve error handling
@@ -62,16 +61,8 @@ export class OlympicService {
     let objSerie = {} as Serie;
 
     if (id == undefined) return null;
-    console.log('rrrrrrrrr');
-    console.log(this.countries);
-    console.log(this.countries[id - 1].participations);
-    console.log(id);
 
     for (let p of this.countries[id - 1].participations) {
-      console.log('zzzzzzz');
-      console.log(p);
-      console.log(this.countries[id - 1]);
-
       objSerie.name = p.year.toString();
       objSerie.value = p.medalsCount;
       series.push(objSerie);
@@ -80,7 +71,6 @@ export class OlympicService {
     lineChartData.name = this.getCountryById(id);
     lineChartData.series = series;
     dataset.push(lineChartData);
-    console.log(dataset);
     return dataset;
   }
 
@@ -141,7 +131,7 @@ export class OlympicService {
   getNumberOfEntriesById(id: number): Number {
     return this.countries[id - 1].participations.length;
   }
-  //A commenter
+
   getNumberOfCountries() {
     return this.countries.length;
   }
