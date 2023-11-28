@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OlympicService } from '../../core/services/olympic.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-country',
@@ -12,7 +12,8 @@ export class CountryComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private olympicService: OlympicService
+    private olympicService: OlympicService,
+    private router: Router
   ) {}
 
   getOlympicService(): OlympicService {
@@ -20,5 +21,9 @@ export class CountryComponent implements OnInit {
   }
   ngOnInit(): void {
     this.countryId = +this.route.snapshot.params['id'];
+    console.log(this.countryId);
+    console.log(this.olympicService.checkCountryId(this.countryId));
+    if (!this.olympicService.checkCountryId(this.countryId))
+      this.router.navigate(['/notfound']);
   }
 }

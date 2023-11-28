@@ -5,10 +5,12 @@ import { catchError, tap } from 'rxjs/operators';
 import { Country } from '../models/Olympic';
 import { LineChartData } from '../models/LineChartData';
 import { Serie } from '../models/Serie';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class OlympicService {
+  [x: string]: any;
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Country[] | null>([]);
   private countries: Country[] = [];
@@ -18,7 +20,7 @@ export class OlympicService {
 
   private loaded: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) {}
   //A commenter
   loadInitialData() {
     return this.http.get<Country[]>(this.olympicUrl).pipe(
@@ -30,7 +32,8 @@ export class OlympicService {
       }),
       catchError((error, caught) => {
         // TODO: improve error handling
-        console.error(error);
+        this.router.navigate(['/oupserror']);
+        //console.error(error);
         // can be useful to end loading state and let the user know something went wrong
         this.olympics$.next(null);
         return caught;
@@ -133,5 +136,8 @@ export class OlympicService {
 
   getNumberOfCountries() {
     return this.countries.length;
+  }
+  checkCountryId(id: number): boolean {
+    return id <= this.getNumberOfCountries() && id > 0 ? true : false;
   }
 }
