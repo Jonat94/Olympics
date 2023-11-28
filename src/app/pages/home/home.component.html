@@ -1,7 +1,8 @@
 <div *ngIf="getOlympicService().isLoaded()==true" class="h20 ">
-    <div
-        class="text-center text-slate-950 align-middle my-5 py-6 text-xl font-semibold border-2 border-teal-500 text-center rounded-md  w-40 align-middle mx-8">
-        {{(getOlympicService().getTotalMedals()/getOlympicService().getNumberOfCountries())}} Medals per Country
+    <div class=" text-white bg-teal-500 text-center rounded-md  w-60 mx-auto my-5 align-top">
+        {{((getOlympicService().getTotalMedals()/getOlympicService().getNumberOfCountries()))|number}} Medals
+        per
+        Country
     </div>
 </div>
 

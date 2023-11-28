@@ -10,9 +10,9 @@ import { Serie } from '../models/Serie';
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<Country[]>([]);
+  private olympics$ = new BehaviorSubject<Country[] | null>([]);
   private countries: Country[] = [];
-  private loaded$ = new BehaviorSubject<boolean>(false);
+  //private loaded$ = new BehaviorSubject<boolean>(false);
   private pieChartData: { name: String; value: number }[] = [];
   private lineChartData: LineChartData[] = [];
 
@@ -25,15 +25,14 @@ export class OlympicService {
       tap((value) => {
         this.olympics$.next(value);
         this.countries = value;
-        this.loaded$.next(true);
-        this.pieChartData = this.buildPieChartData();
         this.loaded = true;
+        this.pieChartData = this.buildPieChartData();
       }),
       catchError((error, caught) => {
         // TODO: improve error handling
         console.error(error);
         // can be useful to end loading state and let the user know something went wrong
-        //this.olympics$.next(null);
+        this.olympics$.next(null);
         return caught;
       })
     );

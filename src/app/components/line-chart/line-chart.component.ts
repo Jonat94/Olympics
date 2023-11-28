@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { OlympicService } from '../../core/services/olympic.service';
 import { LineChartData } from '../../core/models/LineChartData';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-line-chart',
@@ -13,9 +14,12 @@ export class LineChartComponent implements OnInit {
   public dataset: LineChartData[] | null = [];
 
   ngOnInit(): void {
-    this.olympicService.getOlympics().subscribe(() => {
-      this.dataset = this.olympicService.buildLineChartData(this.dataId);
-    });
+    this.olympicService
+      .getOlympics()
+      .pipe(take(1)) //unsubscribe automatiquement
+      .subscribe(() => {
+        this.dataset = this.olympicService.buildLineChartData(this.dataId);
+      });
   }
 
   public getOlympicService() {
