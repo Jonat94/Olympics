@@ -15,4 +15,5 @@
 
 </div>
 <app-pie-chart *ngIf="getOlympicService().getCountries().length!=0"></app-pie-chart>
-<app-loader></app-loader>
+
+<*ngIf="countries==null" app-loader></app-loader>
