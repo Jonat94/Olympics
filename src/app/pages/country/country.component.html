@@ -1,9 +1,15 @@
 <div *ngIf="getOlympicService().isLoaded()==true" class="h20 ">
-    <div class="text-center text-slate-950   align-middle my-5 py-6 text-xl font-semibold">
-        {{ getOlympicService().getCountryById(countryId) }}
+    <div class=" text-center text-slate-950   align-middle my-5 py-6 text-xl font-semibold relative">
+
+        <div class=" text-white bg-teal-500 text-center rounded-md  w-40 mx-auto align-top"> {{
+            getOlympicService().getCountryById(countryId) }}
+        </div>
+        <div>
+            <app-button [url]='' [title]="'Back'" class="text-xs absolute top-6 right-0"></app-button>
+        </div>
     </div>
 </div>
-<div *ngIf="getOlympicService().isLoaded()==true" class=" max-w-2 flex justify-center ">
+<div *ngIf="getOlympicService().isLoaded()==true" class=" max-w-2 flex justify-center  ">
     <app-card [title]="'Number of entries'" [data]="getOlympicService().getNumberOfEntriesById(countryId)"
         *ngIf="getOlympicService().isLoaded()==true"></app-card>
     <app-card [title]="'Total number of medals'" [data]="getOlympicService().getNumberOfMedalsById(countryId)"
@@ -14,9 +20,4 @@
 <div *ngIf="getOlympicService().isLoaded()==true" class="flex justify-center m-10">
     <app-line-chart [dataId]="countryId"></app-line-chart>
 </div>
-<div *ngIf="getOlympicService().isLoaded()==false" class="text-center align-middle">
-    <h1>Loading</h1>
-</div>
-<div class="flex justify-center ">
-    <a routerLink="">back</a>
-</div>
+<app-loader></app-loader>

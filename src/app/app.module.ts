@@ -11,6 +11,8 @@ import { CountryComponent } from './pages/country/country.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { CardComponent } from './components/card/card.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { CardComponent } from './components/card/card.component';
     NotFoundComponent,
     LineChartComponent,
     CardComponent,
+    LoaderComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
