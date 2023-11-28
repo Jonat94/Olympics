@@ -14,7 +14,7 @@
 <div *ngIf="getOlympicService().isLoaded()==true" class="flex justify-center m-10">
     <app-line-chart [dataId]="param"></app-line-chart>
 </div>
-<div *ngIf="getOlympicService().isLoaded()==true" class="text-center align-middle">
+<div *ngIf="getOlympicService().isLoaded()==false" class="text-center align-middle">
     <h1>Loading</h1>
 </div>
 <div class="flex justify-center ">

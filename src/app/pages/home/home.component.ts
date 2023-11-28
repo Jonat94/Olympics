@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
 
   //A commenter
   ngOnInit(): void {
+    console.log('toto');
     this.olympicService.getOlympics().subscribe();
   }
 }

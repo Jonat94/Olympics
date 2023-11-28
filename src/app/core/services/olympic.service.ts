@@ -60,8 +60,18 @@ export class OlympicService {
     let lineChartData = {} as LineChartData;
     let series: Serie[] = [];
     let objSerie = {} as Serie;
+
     if (id == undefined) return null;
+    console.log('rrrrrrrrr');
+    console.log(this.countries);
+    console.log(this.countries[id - 1].participations);
+    console.log(id);
+
     for (let p of this.countries[id - 1].participations) {
+      console.log('zzzzzzz');
+      console.log(p);
+      console.log(this.countries[id - 1]);
+
       objSerie.name = p.year.toString();
       objSerie.value = p.medalsCount;
       series.push(objSerie);
@@ -70,7 +80,7 @@ export class OlympicService {
     lineChartData.name = this.getCountryById(id);
     lineChartData.series = series;
     dataset.push(lineChartData);
-    //console.log(dataset);
+    console.log(dataset);
     return dataset;
   }
 
