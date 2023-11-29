@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OlympicService } from '../../core/services/olympic.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { take } from 'rxjs';
 @Component({
   selector: 'app-country',
   templateUrl: './country.component.html',
@@ -23,7 +23,17 @@ export class CountryComponent implements OnInit {
     this.countryId = +this.route.snapshot.params['id'];
     console.log(this.countryId);
     console.log(this.olympicService.checkCountryId(this.countryId));
-    if (!this.olympicService.checkCountryId(this.countryId))
-      this.router.navigate(['/notfound']);
+    this.olympicService
+      .getOlympics()
+      .pipe()
+      .subscribe((value) => {
+        if (value != null) {
+          console.log(this.countryId);
+          console.log(this.olympicService.checkCountryId(this.countryId));
+        } //if (!this.olympicService.checkCountryId(this.countryId))
+        // this.router.navigate(['/notfound']);
+      });
+    // if (!this.olympicService.checkCountryId(this.countryId))
+    //   this.router.navigate(['/notfound']);
   }
 }

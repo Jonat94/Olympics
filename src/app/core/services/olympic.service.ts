@@ -6,12 +6,14 @@ import { Country } from '../models/Olympic';
 import { LineChartData } from '../models/LineChartData';
 import { Serie } from '../models/Serie';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
 export class OlympicService {
   [x: string]: any;
-  private olympicUrl = './assets/mock/olympic.json';
+  private olympicUrl = environment.baseUrl; //'./assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Country[] | null>([]);
   private countries: Country[] = [];
   //private loaded$ = new BehaviorSubject<boolean>(false);
@@ -138,6 +140,7 @@ export class OlympicService {
     return this.countries.length;
   }
   checkCountryId(id: number): boolean {
+    console.log(this.getNumberOfCountries());
     return id <= this.getNumberOfCountries() && id > 0 ? true : false;
   }
 }
