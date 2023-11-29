@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { formatNumber } from '@angular/common';
 import { OlympicService } from '../../core/services/olympic.service';
 
 @Component({
