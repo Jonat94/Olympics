@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment';
 export class OlympicService {
   [x: string]: any;
   private olympicUrl = environment.baseUrl; //'./assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<Country[] | null>([]);
+  private olympics$ = new BehaviorSubject<Country[] | null>(null);
   private countries: Country[] = [];
   //private loaded$ = new BehaviorSubject<boolean>(false);
   private pieChartData: { name: String; value: number }[] = [];
@@ -140,7 +140,10 @@ export class OlympicService {
     return this.countries.length;
   }
   checkCountryId(id: number): boolean {
-    console.log(this.getNumberOfCountries());
-    return id <= this.getNumberOfCountries() && id > 0 ? true : false;
+    console.log('ffffff' + this.getNumberOfCountries());
+    // if (id <= 5) return true;
+    // return false;
+    // )
+    return true; //id <= this.getNumberOfCountries(); //&& id > 0 ? true : false;
   }
 }

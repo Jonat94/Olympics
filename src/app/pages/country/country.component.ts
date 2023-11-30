@@ -9,6 +9,7 @@ import { take } from 'rxjs';
 })
 export class CountryComponent implements OnInit {
   public countryId!: number;
+  //numberOfentries
 
   constructor(
     private route: ActivatedRoute,
@@ -21,19 +22,16 @@ export class CountryComponent implements OnInit {
   }
   ngOnInit(): void {
     this.countryId = +this.route.snapshot.params['id'];
-    console.log(this.countryId);
-    console.log(this.olympicService.checkCountryId(this.countryId));
     this.olympicService
       .getOlympics()
-      .pipe()
+      .pipe() //unsubscribe automatiquement
       .subscribe((value) => {
+        console.log('aa' + value);
         if (value != null) {
-          console.log(this.countryId);
-          console.log(this.olympicService.checkCountryId(this.countryId));
-        } //if (!this.olympicService.checkCountryId(this.countryId))
-        // this.router.navigate(['/notfound']);
+          //cas ou l'observable contient un null
+          if (this.countryId > value.length || this.countryId < 0)
+            this.router.navigate([`notfound`]);
+        }
       });
-    // if (!this.olympicService.checkCountryId(this.countryId))
-    //   this.router.navigate(['/notfound']);
   }
 }

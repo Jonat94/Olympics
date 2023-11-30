@@ -17,7 +17,8 @@ export class LineChartComponent implements OnInit {
     this.olympicService
       .getOlympics()
       .pipe(take(1)) //unsubscribe automatiquement
-      .subscribe(() => {
+      .subscribe((value) => {
+        console.log(value);
         this.dataset = this.olympicService.buildLineChartData(this.dataId);
       });
   }
