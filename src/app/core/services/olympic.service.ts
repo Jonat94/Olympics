@@ -132,7 +132,7 @@ export class OlympicService {
     return this.pieChartData[id - 1].value;
   }
   //A commenter
-  getNumberOfEntriesById(id: number): Number {
+  getNumberOfEntriesById(id: number): number {
     return this.countries[id - 1].participations.length;
   }
 

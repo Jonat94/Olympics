@@ -10,7 +10,7 @@ import { take } from 'rxjs';
 })
 export class LineChartComponent implements OnInit {
   constructor(private olympicService: OlympicService) {}
-  @Input() dataId?: number;
+  @Input() dataId: number = 1;
   public dataset: LineChartData[] | null = [];
 
   ngOnInit(): void {
@@ -18,7 +18,7 @@ export class LineChartComponent implements OnInit {
       .getOlympics()
       .pipe(take(1)) //unsubscribe automatiquement
       .subscribe((value) => {
-        console.log(value);
+        //console.log('bb' + value);
         this.dataset = this.olympicService.buildLineChartData(this.dataId);
       });
   }
