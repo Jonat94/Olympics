@@ -133,11 +133,22 @@ export class OlympicService {
   }
   //A commenter
   getNumberOfEntriesById(id: number): number {
-    return this.countries[id - 1].participations.length;
+    try {
+      return this.countries[id - 1].participations.length;
+    } catch (error) {
+      this.router.navigate(['error']);
+      console.log(error);
+      throw new Error('country negatif');
+    }
   }
 
   getNumberOfCountries() {
-    return this.countries.length;
+    try {
+      return this.countries.length;
+    } catch (error) {
+      this.router.navigate(['error']);
+      throw error;
+    }
   }
   checkCountryId(id: number): boolean {
     console.log('ffffff' + this.getNumberOfCountries());

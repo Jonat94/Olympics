@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HomeComponent } from './pages/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,8 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
 import { CardComponent } from './components/card/card.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ButtonComponent } from './components/button/button.component';
+import { GlobalErrorHandlerService } from './core/services/global-error-handler.service';
+import { ErrorComponent } from './pages/error/error.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ButtonComponent } from './components/button/button.component';
     CardComponent,
     LoaderComponent,
     ButtonComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,10 @@ import { ButtonComponent } from './components/button/button.component';
     BrowserAnimationsModule,
     NgxChartsModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

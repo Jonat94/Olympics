@@ -24,20 +24,5 @@ export class CountryComponent implements OnInit {
   }
   ngOnInit(): void {
     this.countryId = +this.route.snapshot.params['id'];
-    this.olympicService
-      .getOlympics()
-      .pipe(take(1)) //unsubscribe automatiquement
-      .subscribe((value) => {
-        //console.log('aa' + value);
-      });
-    /*if (value != null) {
-          //cas ou l'observable contient un null
-          this.numberOfentries =
-            this.getOlympicService().getNumberOfEntriesById(this.countryId);
-          if (this.countryId > value.length || this.countryId < 0)
-            this.router.navigate([`notfound`]);
-        }
-      }
-      );*/
   }
 }
