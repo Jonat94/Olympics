@@ -13,9 +13,9 @@ export class CountryComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private olympicService: OlympicService,
-    private router: Router
-  ) {
+    private olympicService: OlympicService
+  ) //  private router: Router
+  {
     this.numberOfentries = 0;
   }
 

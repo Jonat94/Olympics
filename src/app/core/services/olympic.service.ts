@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Country } from '../models/Olympic';
 import { LineChartData } from '../models/LineChartData';
@@ -19,7 +19,8 @@ export class OlympicService {
   //private loaded$ = new BehaviorSubject<boolean>(false);
   private pieChartData: { name: String; value: number }[] = [];
   private lineChartData: LineChartData[] = [];
-
+  //public httpError: boolean = false;
+  public errorMessage!: String;
   private loaded: boolean = false;
 
   constructor(private router: Router, private http: HttpClient) {}
@@ -30,18 +31,48 @@ export class OlympicService {
         this.olympics$.next(value);
         this.countries = value;
         this.loaded = true;
+        // this.httpError = false;
         this.pieChartData = this.buildPieChartData();
       }),
       catchError((error, caught) => {
         // TODO: improve error handling
-        this.router.navigate(['/oupserror']);
+        //this.olympics$.next(null);
+        //throw new Error('erreur http');
         //console.error(error);
         // can be useful to end loading state and let the user know something went wrong
+        //this.httpError = true;
         this.olympics$.next(null);
-        return caught;
+        //let errorMsg: String;
+
+        let errorMsg: string;
+        if (error.error instanceof ErrorEvent) {
+          errorMsg = `Error: ${error.error.message}`;
+        } else {
+          errorMsg = this.getServerErrorMessage(error);
+        }
+
+        return throwError(() => new Error(errorMsg));
       })
     );
   }
+
+  private getServerErrorMessage(error: HttpErrorResponse): string {
+    switch (error.status) {
+      case 404: {
+        return `Not Found: ${error.message}`;
+      }
+      case 403: {
+        return `Access Denied: ${error.message}`;
+      }
+      case 500: {
+        return `Internal Server Error: ${error.message}`;
+      }
+      default: {
+        return `Unknown Server Error: ${error.message}`;
+      }
+    }
+  }
+
   //A commenter
   public buildPieChartData() {
     let medalsCount = [];
@@ -136,9 +167,8 @@ export class OlympicService {
     try {
       return this.countries[id - 1].participations.length;
     } catch (error) {
-      this.router.navigate(['error']);
-      console.log(error);
-      throw new Error('country negatif');
+      throw Error('countryId error,' + error);
+      //this.router.navigate(['error']);
     }
   }
 
@@ -146,7 +176,7 @@ export class OlympicService {
     try {
       return this.countries.length;
     } catch (error) {
-      this.router.navigate(['error']);
+      //this.router.navigate(['error']);
       throw error;
     }
   }

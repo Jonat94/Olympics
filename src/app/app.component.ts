@@ -19,7 +19,7 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
-    this.olympicService.loadInitialData().pipe(take(1)).subscribe();
+    this.olympicService.loadInitialData().pipe(take(1)).subscribe(); //unsubscribe automatically
     this.responsive
       .observe([Breakpoints.HandsetPortrait])
       .subscribe((state: BreakpointState) => {
