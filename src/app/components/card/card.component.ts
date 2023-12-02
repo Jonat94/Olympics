@@ -7,7 +7,7 @@ import { OlympicService } from '../../core/services/olympic.service';
   styleUrl: './card.component.scss',
 })
 export class CardComponent {
-  @Input() public data: Number = 0;
+  @Input() public data: Number | null = 0;
   @Input() public title: String = '';
   constructor(private olympicService: OlympicService) {}
 

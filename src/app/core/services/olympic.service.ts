@@ -15,6 +15,11 @@ export class OlympicService {
   [x: string]: any;
   private olympicUrl = environment.baseUrl; //'./assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Country[] | null>(null);
+  public nbCountries$ = new BehaviorSubject<number>(0);
+  public dataLoaded$ = new BehaviorSubject<boolean>(false);
+  public numberOfgames$ = new BehaviorSubject<number>(0);
+  public totalMedals$ = new BehaviorSubject<number>(0);
+
   private countries: Country[] = [];
   //private loaded$ = new BehaviorSubject<boolean>(false);
   private pieChartData: { name: String; value: number }[] = [];
@@ -28,13 +33,18 @@ export class OlympicService {
   loadInitialData() {
     return this.http.get<Country[]>(this.olympicUrl).pipe(
       tap((value) => {
-        this.olympics$.next(value);
         this.countries = value;
+        this.pieChartData = this.buildPieChartData();
+        this.olympics$.next(value);
+        this.nbCountries$.next(this.getNumberOfCountries());
+        this.numberOfgames$.next(this.getNumberOfGames());
+        this.totalMedals$.next(this.getTotalMedals());
+        this.dataLoaded$.next(true);
         this.loaded = true;
         // this.httpError = false;
-        this.pieChartData = this.buildPieChartData();
       }),
       catchError((error, caught) => {
+        console.error('bbbbbbbb');
         // TODO: improve error handling
         //this.olympics$.next(null);
         //throw new Error('erreur http');
@@ -44,9 +54,11 @@ export class OlympicService {
         this.olympics$.next(null);
         //let errorMsg: String;
 
-        let errorMsg: string;
+        let errorMsg: string = 'coucou';
+        console.log('cccccccc');
         if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
+          console.log('bbbbbbba');
+          errorMsg = `oups there was an internal server error`;
         } else {
           errorMsg = this.getServerErrorMessage(error);
         }
@@ -57,12 +69,13 @@ export class OlympicService {
   }
 
   private getServerErrorMessage(error: HttpErrorResponse): string {
+    console.log('aaaaaaaaa');
     switch (error.status) {
       case 404: {
-        return `Not Found: ${error.message}`;
+        return `oupss the server is unreachable`;
       }
       case 403: {
-        return `Access Denied: ${error.message}`;
+        return `Access Denied to the server`;
       }
       case 500: {
         return `Internal Server Error: ${error.message}`;
