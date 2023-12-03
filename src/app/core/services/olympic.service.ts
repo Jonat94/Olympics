@@ -13,14 +13,13 @@ import { environment } from '../../../environments/environment';
 })
 export class OlympicService {
   //[x: string]: any;
-
   private olympicUrl = environment.baseUrl; //'./assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Country[] | null>(null);
   public nbCountries$ = new BehaviorSubject<number>(0);
   public dataLoaded$ = new BehaviorSubject<boolean>(false);
   public numberOfgames$ = new BehaviorSubject<number>(0);
   public totalMedals$ = new BehaviorSubject<number>(0);
-  private data: String[] = [];
+
   private countries: Country[] = [];
   //private loaded$ = new BehaviorSubject<boolean>(false);
   private pieChartData: { name: String; value: number }[] = [];
@@ -32,15 +31,12 @@ export class OlympicService {
   constructor(private router: Router, private http: HttpClient) {}
   //A commenter
   loadInitialData() {
-    let dataObj = {};
     return this.http.get<Country[]>(this.olympicUrl).pipe(
       tap((value) => {
         this.countries = value;
         this.pieChartData = this.buildPieChartData();
         this.olympics$.next(value);
-        this.nbCountries$.next();
-        dataObj.numberOfCountrie = this.getNumberOfCountries();
-
+        this.nbCountries$.next(this.getNumberOfCountries());
         this.numberOfgames$.next(this.getNumberOfGames());
         this.totalMedals$.next(this.getTotalMedals());
         this.dataLoaded$.next(true);

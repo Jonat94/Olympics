@@ -10,20 +10,12 @@ export class GlobalErrorHandlerService implements ErrorHandler {
   constructor(private router: Router, private olympicService: OlympicService) {}
 
   handleError(error: Error) {
-    //console.error('bbbbbbba');
-    //console.error('An error occurred:');
-    //console.log(error.error);
-    // this.olympicService.errorMessage = error.error.message;
-    //console.log(error);
     if (error instanceof Error) {
       this.olympicService.errorMessage = `oups there was an internal server error`;
     } else {
       this.olympicService.errorMessage = this.getServerErrorMessage(error);
     }
-    console.log(error);
     this.router.navigate(['error']);
-
-    //this.olympicService.errorMessage += 'titiiiiiiiii';
   }
 
   private getServerErrorMessage(error: HttpErrorResponse): string {
@@ -35,10 +27,10 @@ export class GlobalErrorHandlerService implements ErrorHandler {
         return `Access Denied to the server`;
       }
       case 500: {
-        return `Internal Server Error:`;
+        return `Internal Server Error`;
       }
       default: {
-        return `Unknown Server Error:`;
+        return `Server Error : ${error.error.error}`;
       }
     }
   }

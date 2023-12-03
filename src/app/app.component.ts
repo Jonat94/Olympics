@@ -19,15 +19,19 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
-    this.olympicService.loadInitialData().pipe(take(1)).subscribe(); //unsubscribe automatically
-    this.responsive
-      .observe([Breakpoints.HandsetPortrait])
-      .subscribe((state: BreakpointState) => {
-        if (state.matches) {
-          console.log(
-            'This is the Handset Portrait point at max-width: 599.98 px and portrait orientation.'
-          );
-        }
-      });
+    try {
+      this.olympicService.loadInitialData().pipe(take(1)).subscribe(); //unsubscribe automatically
+      this.responsive
+        .observe([Breakpoints.HandsetPortrait])
+        .subscribe((state: BreakpointState) => {
+          if (state.matches) {
+            console.log(
+              'This is the Handset Portrait point at max-width: 599.98 px and portrait orientation.'
+            );
+          }
+        });
+    } catch (error) {
+      throw error;
+    }
   }
 }
