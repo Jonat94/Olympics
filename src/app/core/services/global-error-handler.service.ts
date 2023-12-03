@@ -9,28 +9,24 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class GlobalErrorHandlerService implements ErrorHandler {
   constructor(private router: Router, private olympicService: OlympicService) {}
 
-  handleError(error: { error: any }) {
-    console.error('bbbbbbba');
+  handleError(error: Error) {
+    //console.error('bbbbbbba');
     //console.error('An error occurred:');
-    //console.error(error);
-    this.olympicService.errorMessage = error.error.message;
-
-    if (error.error instanceof ErrorEvent) {
-      console.log('bbbbbbba');
+    //console.log(error.error);
+    // this.olympicService.errorMessage = error.error.message;
+    //console.log(error);
+    if (error instanceof Error) {
       this.olympicService.errorMessage = `oups there was an internal server error`;
     } else {
-      this.olympicService.errorMessage = this.getServerErrorMessage(
-        error.error
-      );
+      this.olympicService.errorMessage = this.getServerErrorMessage(error);
     }
-    console.log('ddddddddd');
+    console.log(error);
     this.router.navigate(['error']);
 
-    //alert(error);
+    //this.olympicService.errorMessage += 'titiiiiiiiii';
   }
 
   private getServerErrorMessage(error: HttpErrorResponse): string {
-    console.log('aaazzzzaaaaaa');
     switch (error.status) {
       case 404: {
         return `oupss the server is unreachable`;
@@ -39,10 +35,10 @@ export class GlobalErrorHandlerService implements ErrorHandler {
         return `Access Denied to the server`;
       }
       case 500: {
-        return `Internal Server Error: ${error.message}`;
+        return `Internal Server Error:`;
       }
       default: {
-        return `Unknown Server Error: ${error.message}`;
+        return `Unknown Server Error:`;
       }
     }
   }

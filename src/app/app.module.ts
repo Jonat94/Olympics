@@ -15,6 +15,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ButtonComponent } from './components/button/button.component';
 import { GlobalErrorHandlerService } from './core/services/global-error-handler.service';
 import { ErrorComponent } from './pages/error/error.component';
+import { TestErrorComponent } from './components/test-error/test-error.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ErrorComponent } from './pages/error/error.component';
     LoaderComponent,
     ButtonComponent,
     ErrorComponent,
+    TestErrorComponent,
   ],
   imports: [
     BrowserModule,

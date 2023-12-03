@@ -12,7 +12,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class OlympicService {
-  [x: string]: any;
+  //[x: string]: any;
   private olympicUrl = environment.baseUrl; //'./assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Country[] | null>(null);
   public nbCountries$ = new BehaviorSubject<number>(0);
@@ -25,7 +25,7 @@ export class OlympicService {
   private pieChartData: { name: String; value: number }[] = [];
   private lineChartData: LineChartData[] = [];
   //public httpError: boolean = false;
-  public errorMessage!: String;
+  public errorMessage: String = '';
   private loaded: boolean = false;
 
   constructor(private router: Router, private http: HttpClient) {}
@@ -43,8 +43,8 @@ export class OlympicService {
         this.loaded = true;
         // this.httpError = false;
       }),
-      catchError((error, caught) => {
-        console.error('bbbbbbbb');
+      catchError((err) => {
+        //console.error('bbbbbbbb');
         // TODO: improve error handling
         //this.olympics$.next(null);
         //throw new Error('erreur http');
@@ -54,36 +54,13 @@ export class OlympicService {
         this.olympics$.next(null);
         //let errorMsg: String;
 
-        let errorMsg: string = 'coucou';
-        console.log('cccccccc');
-        if (error.error instanceof ErrorEvent) {
-          console.log('bbbbbbba');
-          errorMsg = `oups there was an internal server error`;
-        } else {
-          errorMsg = this.getServerErrorMessage(error);
-        }
+        //let errorMsg: string = 'coucou';
 
-        return throwError(() => new Error(errorMsg));
+        //return throwError(() => new Error('aaaaaaa'));
+        //console.log(err);
+        return throwError(() => err);
       })
     );
-  }
-
-  private getServerErrorMessage(error: HttpErrorResponse): string {
-    console.log('aaaaaaaaa');
-    switch (error.status) {
-      case 404: {
-        return `oupss the server is unreachable`;
-      }
-      case 403: {
-        return `Access Denied to the server`;
-      }
-      case 500: {
-        return `Internal Server Error: ${error.message}`;
-      }
-      default: {
-        return `Unknown Server Error: ${error.message}`;
-      }
-    }
   }
 
   //A commenter
@@ -132,9 +109,9 @@ export class OlympicService {
   getOlympics() {
     return this.olympics$.asObservable();
   }
-  getCountries() {
-    return this.countries;
-  }
+  // getCountries() {
+  //   return this.countries;
+  // }
 
   getPieChartData() {
     return this.pieChartData;
@@ -180,7 +157,7 @@ export class OlympicService {
     try {
       return this.countries[id - 1].participations.length;
     } catch (error) {
-      throw Error('countryId error,' + error);
+      throw error;
       //this.router.navigate(['error']);
     }
   }
