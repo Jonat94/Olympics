@@ -169,7 +169,7 @@ export class OlympicService {
     }
   }
   //A commenter
-  getNumberOfAthletesById(id: number): Number {
+  getNumberOfAthletesById(id: number): number {
     try {
       return this.countries[id - 1].participations.reduce(
         (acc, cur) => acc + cur.athleteCount,
@@ -180,7 +180,7 @@ export class OlympicService {
     }
   }
   //A commenter
-  getNumberOfMedalsById(id: number): Number {
+  getNumberOfMedalsById(id: number): number {
     try {
       return this.pieChartData[id - 1].value;
     } catch (error) {
