@@ -13,6 +13,7 @@ import { environment } from '../../../environments/environment';
 })
 export class OlympicService {
   //[x: string]: any;
+
   private olympicUrl = environment.baseUrl; //'./assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Country[] | null>(null);
   public nbCountries$ = new BehaviorSubject<number>(0);
@@ -44,20 +45,7 @@ export class OlympicService {
         // this.httpError = false;
       }),
       catchError((err) => {
-        //console.error('bbbbbbbb');
-        // TODO: improve error handling
-        //this.olympics$.next(null);
-        //throw new Error('erreur http');
-        //console.error(error);
-        // can be useful to end loading state and let the user know something went wrong
-        //this.httpError = true;
         this.olympics$.next(null);
-        //let errorMsg: String;
-
-        //let errorMsg: string = 'coucou';
-
-        //return throwError(() => new Error('aaaaaaa'));
-        //console.log(err);
         return throwError(() => err);
       })
     );
@@ -66,16 +54,20 @@ export class OlympicService {
   //A commenter
   public buildPieChartData() {
     let medalsCount = [];
-    for (let c of this.countries) {
-      let obj = {} as Serie;
-      obj.value = c.participations.reduce(
-        (acc, cur) => acc + cur.medalsCount,
-        0
-      );
-      obj.name = c.country;
-      medalsCount.push(obj);
+    try {
+      for (let c of this.countries) {
+        let obj = {} as Serie;
+        obj.value = c.participations.reduce(
+          (acc, cur) => acc + cur.medalsCount,
+          0
+        );
+        obj.name = c.country;
+        medalsCount.push(obj);
+      }
+      return medalsCount;
+    } catch (error) {
+      throw error;
     }
-    return medalsCount;
   }
 
   //A commenter
@@ -84,73 +76,117 @@ export class OlympicService {
     let lineChartData = {} as LineChartData;
     let series: Serie[] = [];
     let objSerie = {} as Serie;
+    try {
+      if (id == undefined) return null;
 
-    if (id == undefined) return null;
-
-    for (let p of this.countries[id - 1].participations) {
-      objSerie.name = p.year.toString();
-      objSerie.value = p.medalsCount;
-      series.push(objSerie);
-      objSerie = new Object() as Serie; //reinitialisation de la variable / nlle objet
+      for (let p of this.countries[id - 1].participations) {
+        objSerie.name = p.year.toString();
+        objSerie.value = p.medalsCount;
+        series.push(objSerie);
+        objSerie = new Object() as Serie; //reinitialisation de la variable / nlle objet
+      }
+      lineChartData.name = this.getCountryById(id);
+      lineChartData.series = series;
+      dataset.push(lineChartData);
+      return dataset;
+    } catch (error) {
+      throw error;
     }
-    lineChartData.name = this.getCountryById(id);
-    lineChartData.series = series;
-    dataset.push(lineChartData);
-    return dataset;
   }
 
   getLineChartData() {
-    return this.lineChartData;
+    try {
+      return this.lineChartData;
+    } catch (error) {
+      throw error;
+    }
   }
 
   isLoaded() {
-    return this.loaded;
+    try {
+      return this.loaded;
+    } catch (error) {
+      throw error;
+    }
   }
   getOlympics() {
-    return this.olympics$.asObservable();
+    try {
+      return this.olympics$.asObservable();
+    } catch (error) {
+      throw error;
+    }
   }
   // getCountries() {
   //   return this.countries;
   // }
 
   getPieChartData() {
-    return this.pieChartData;
+    try {
+      return this.pieChartData;
+    } catch (error) {
+      throw error;
+    }
   }
   //A commenter
   getCountryById(argId: number): String {
-    for (let country of this.countries)
-      if (country.id == argId) return country.country;
-    return '';
+    try {
+      for (let country of this.countries)
+        if (country.id == argId) return country.country;
+      return '';
+    } catch (error) {
+      throw error;
+    }
   }
   //A commenter
   getIdByCountry(ctryName: String) {
-    for (let country of this.countries)
-      if (country.country == ctryName) return country.id;
-    return null;
+    try {
+      for (let country of this.countries)
+        if (country.country == ctryName) return country.id;
+      return null;
+    } catch (error) {
+      throw error;
+    }
   }
   //A commenter
   public getNumberOfGames() {
-    let games: number[] = [];
-    for (let country of this.countries)
-      for (let participation of country.participations) {
-        if (!games.includes(participation.year)) games.push(participation.year);
-      }
-    return games.length;
+    try {
+      let games: number[] = [];
+      for (let country of this.countries)
+        for (let participation of country.participations) {
+          if (!games.includes(participation.year))
+            games.push(participation.year);
+        }
+      return games.length;
+    } catch (error) {
+      throw error;
+    }
   }
   //A commenter
   getTotalMedals() {
-    return this.pieChartData.reduce((acc, cur) => acc + cur.value, 0);
+    try {
+      return this.pieChartData.reduce((acc, cur) => acc + cur.value, 0);
+    } catch (error) {
+      throw error;
+    }
   }
   //A commenter
   getNumberOfAthletesById(id: number): Number {
-    return this.countries[id - 1].participations.reduce(
-      (acc, cur) => acc + cur.athleteCount,
-      0
-    );
+    try {
+      return this.countries[id - 1].participations.reduce(
+        (acc, cur) => acc + cur.athleteCount,
+        0
+      );
+    } catch (error) {
+      throw error;
+    }
   }
   //A commenter
   getNumberOfMedalsById(id: number): Number {
-    return this.pieChartData[id - 1].value;
+    try {
+      return this.pieChartData[id - 1].value;
+    } catch (error) {
+      throw error;
+    }
   }
   //A commenter
   getNumberOfEntriesById(id: number): number {
@@ -158,7 +194,6 @@ export class OlympicService {
       return this.countries[id - 1].participations.length;
     } catch (error) {
       throw error;
-      //this.router.navigate(['error']);
     }
   }
 
