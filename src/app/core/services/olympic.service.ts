@@ -26,7 +26,7 @@ export class OlympicService {
   private lineChartData: LineChartData[] = [];
   //public httpError: boolean = false;
   public errorMessage: String = '';
-  private loaded: boolean = false;
+  //private loaded: boolean = false;
 
   constructor(private router: Router, private http: HttpClient) {}
   //A commenter
@@ -36,11 +36,11 @@ export class OlympicService {
         this.countries = value;
         this.pieChartData = this.buildPieChartData();
         this.olympics$.next(value);
-        this.nbCountries$.next(this.getNumberOfCountries());
-        this.numberOfgames$.next(this.getNumberOfGames());
-        this.totalMedals$.next(this.getTotalMedals());
+        //this.nbCountries$.next(this.getNumberOfCountries());
+        //this.numberOfgames$.next(this.getNumberOfGames());
+        //this.totalMedals$.next(this.getTotalMedals());
         this.dataLoaded$.next(true);
-        this.loaded = true;
+        //this.loaded = true;
         // this.httpError = false;
       }),
       catchError((err) => {
@@ -101,13 +101,13 @@ export class OlympicService {
     }
   }
 
-  isLoaded() {
-    try {
-      return this.loaded;
-    } catch (error) {
-      throw error;
-    }
-  }
+  // isLoaded() {
+  //   try {
+  //     return this.loaded;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
   getOlympics() {
     try {
       return this.olympics$.asObservable();
@@ -190,6 +190,7 @@ export class OlympicService {
   //A commenter
   getNumberOfEntriesById(id: number): number {
     try {
+      console.log(id);
       return this.countries[id - 1].participations.length;
     } catch (error) {
       throw error;

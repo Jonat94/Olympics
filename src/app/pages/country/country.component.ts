@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OlympicService } from '../../core/services/olympic.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-country',

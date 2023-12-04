@@ -11,11 +11,12 @@ export class GlobalErrorHandlerService implements ErrorHandler {
 
   handleError(error: Error) {
     if (error instanceof Error) {
-      this.olympicService.errorMessage = `oups there was an internal server error`;
+      this.olympicService.errorMessage = `${error.message}`;
     } else {
       this.olympicService.errorMessage = this.getServerErrorMessage(error);
     }
     this.router.navigate(['error']);
+    console.error(error);
   }
 
   private getServerErrorMessage(error: HttpErrorResponse): string {
