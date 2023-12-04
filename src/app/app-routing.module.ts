@@ -7,16 +7,17 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: '', //home
-    component: HomeComponent,
-  },
-  {
     path: 'country/:id', //country page
     component: CountryComponent,
   },
   {
     path: 'error', //error page
     component: ErrorComponent,
+  },
+
+  {
+    path: '', //home
+    component: HomeComponent,
   },
   {
     path: '**', // wildcard
