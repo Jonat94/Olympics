@@ -14,18 +14,11 @@ import { environment } from '../../../environments/environment';
 export class OlympicService {
   private olympicUrl = environment.baseUrl; //'./assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Country[] | null>(null);
-  public nbCountries$ = new BehaviorSubject<number>(0);
   public dataLoaded$ = new BehaviorSubject<boolean>(false);
-  public numberOfgames$ = new BehaviorSubject<number>(0);
-  public totalMedals$ = new BehaviorSubject<number>(0);
-
   private countries: Country[] = [];
-  //private loaded$ = new BehaviorSubject<boolean>(false);
   private pieChartData: { name: String; value: number }[] = [];
   private lineChartData: LineChartData[] = [];
-  //public httpError: boolean = false;
   public errorMessage: String = '';
-  //private loaded: boolean = false;
 
   constructor(private router: Router, private http: HttpClient) {}
   //A commenter
@@ -35,15 +28,9 @@ export class OlympicService {
         this.countries = value;
         this.pieChartData = this.buildPieChartData();
         this.olympics$.next(value);
-        //this.nbCountries$.next(this.getNumberOfCountries());
-        //this.numberOfgames$.next(this.getNumberOfGames());
-        //this.totalMedals$.next(this.getTotalMedals());
         this.dataLoaded$.next(true);
-        //this.loaded = true;
-        // this.httpError = false;
       }),
       catchError((err) => {
-        //this.olympics$.next(null);
         return throwError(() => err);
       })
     );
@@ -100,13 +87,6 @@ export class OlympicService {
     }
   }
 
-  // isLoaded() {
-  //   try {
-  //     return this.loaded;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
   getOlympics() {
     try {
       return this.olympics$.asObservable();
@@ -114,9 +94,6 @@ export class OlympicService {
       throw error;
     }
   }
-  // getCountries() {
-  //   return this.countries;
-  // }
 
   getPieChartData() {
     try {
@@ -207,15 +184,7 @@ export class OlympicService {
     try {
       return this.countries.length;
     } catch (error) {
-      //this.router.navigate(['error']);
       throw error;
     }
-  }
-  checkCountryId(id: number): boolean {
-    console.log('ffffff' + this.getNumberOfCountries());
-    // if (id <= 5) return true;
-    // return false;
-    // )
-    return true; //id <= this.getNumberOfCountries(); //&& id > 0 ? true : false;
   }
 }
