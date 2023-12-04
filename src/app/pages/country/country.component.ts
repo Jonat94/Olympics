@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OlympicService } from '../../core/services/olympic.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'app-country',
@@ -28,8 +27,6 @@ export class CountryComponent implements OnInit {
     this.countryId = +this.route.snapshot.params['id'];
 
     this.olympicService.dataLoaded$.subscribe((value) => {
-      //if (this.olympicService.getOlympics.length != 0) {
-      //tester la presence du tableau ou bien ne pas initialiser.
       this.dataLoaded = value;
       this.countryName = this.olympicService.getCountryById(this.countryId);
       this.numberOfentries = this.olympicService.getNumberOfEntriesById(
@@ -41,9 +38,6 @@ export class CountryComponent implements OnInit {
       this.numberOfAthletes = this.olympicService.getNumberOfAthletesById(
         this.countryId
       );
-      //}
-
-      //console.log(this.olympicService.getCountryById(this.countryId));
     });
   }
 }

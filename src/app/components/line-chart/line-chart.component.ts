@@ -23,7 +23,7 @@ export class LineChartComponent implements OnInit {
   ngOnInit(): void {
     this.olympicService
       .getOlympics()
-      .pipe(take(1)) //unsubscribe automatiquement
+      .pipe(take(1)) //unsubscribe automatique
       .subscribe(() => {
         this.dataLoaded = true;
         this.dataset = this.olympicService.buildLineChartData(this.dataId);
@@ -33,11 +33,9 @@ export class LineChartComponent implements OnInit {
       .observe(['(max-width: 640px)', '(min-width: 640px)'])
       .subscribe((result) => {
         if (this.responsive.isMatched('(max-width: 640px)')) {
-          console.log('screens matches 640px');
           this.chartView = [350, 300];
         }
         if (this.responsive.isMatched('(min-width: 640px)')) {
-          console.log('screens matches 640px');
           this.chartView = [600, 300];
         }
       });
