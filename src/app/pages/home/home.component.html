@@ -1,22 +1,24 @@
+<!-- <div><app-test-error></app-test-error></div> -->
+
 <div class="">
-    <div *ngIf="getOlympicService().isLoaded()==true" class="h20 ">
+    <div *ngIf="this.dataLoaded" class="h20 ">
         <div class=" text-white bg-teal-500 text-center rounded-md  w-48 sm:w-60 mx-auto my-8 align-top">
-            {{((getOlympicService().getTotalMedals()/getOlympicService().getNumberOfCountries()))|number}} Medals
+            {{this.totalMedals/this.nbCountries}} Medals
             per
             Country
         </div>
     </div>
 
-    <div *ngIf="getOlympicService().isLoaded()==true" class=" max-w-2 flex justify-center flex-col sm:flex-row">
+    <div *ngIf="this.dataLoaded" class=" max-w-2 flex justify-center flex-col sm:flex-row">
 
-        <app-card [title]="'Number of Olympics'" [data]="getOlympicService().getNumberOfGames()"
-            *ngIf="getOlympicService().isLoaded()==true" class="mx-auto mb-4 sm:mx-4 my-0"></app-card>
-        <app-card [title]="'Number of countries'" [data]="getOlympicService().getNumberOfCountries()"
-            *ngIf="getOlympicService().isLoaded()==true" class="mx-auto mb-4 sm:mx-4 my-0"></app-card>
+        <app-card [title]="'Number of Olympics'" [data]="this.numberOfGames" *ngIf="this.dataLoaded"
+            class="mx-auto mb-4 sm:mx-4 my-0"></app-card>
+        <app-card *ngIf="this.dataLoaded" [title]="'Number of countries'" [data]="this.nbCountries"
+            class="mx-auto mb-4 sm:mx-4 my-0"></app-card>
 
     </div>
     <div class=" flex justify-center content-start h-70 py-1">
-        <app-pie-chart *ngIf="getOlympicService().getCountries().length!=0"></app-pie-chart>
+        <app-pie-chart *ngIf="this.nbCountries"></app-pie-chart>
     </div>
     <app-loader></app-loader>
 </div>

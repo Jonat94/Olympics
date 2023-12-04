@@ -1,4 +1,4 @@
-<ngx-charts-line-chart *ngIf="getOlympicService().isLoaded()==true" [view]=[500,300] [legend]="false"
-    [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true" [xAxisLabel]="'Year'"
-    [yAxisLabel]="'Medals'" [timeline]="true" [results]="dataset">
+<ngx-charts-line-chart *ngIf="this.dataLoaded" [view]="this.chartView" [legend]="false" [showXAxisLabel]="true"
+    [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true" [xAxisLabel]="'Year'" [yAxisLabel]="'Medals'"
+    [timeline]="true" [results]="dataset">
 </ngx-charts-line-chart>

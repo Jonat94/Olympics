@@ -1,25 +1,25 @@
 <div class="">
     <app-loader></app-loader>
-    <div *ngIf="getOlympicService().isLoaded()==true" class="h20 ">
+    <div *ngIf="this.dataLoaded" class="h20 ">
         <div class="  text-center text-slate-950   align-middle my-5  relative">
 
             <div class="text-white bg-teal-500 text-center rounded-md text-m w-40 sm:w-60 mx-auto my-8 align-top"> {{
-                getOlympicService().getCountryById(countryId) }}
+                this.countryName }}
             </div>
 
             <app-button [url]='' [title]="'Back>'" class="text-xs absolute top-0 right-0"></app-button>
 
         </div>
     </div>
-    <div *ngIf="getOlympicService().isLoaded()==true" class="max-w-2 flex justify-center my-auto flex-col sm:flex-row">
-        <app-card [title]="'Number of entries'" [data]="getOlympicService().getNumberOfEntriesById(countryId)"
-            *ngIf="getOlympicService().isLoaded()==true" class="mx-auto sm:mx-4 my-0 sm:my-0"></app-card>
-        <app-card [title]="'Total number of medals'" [data]="getOlympicService().getNumberOfMedalsById(countryId)"
-            *ngIf="getOlympicService().isLoaded()==true" class="mx-auto sm:mx-4 my-4 sm:my-0"></app-card>
-        <app-card [title]="'Total number of athletes'" [data]="getOlympicService().getNumberOfAthletesById(countryId)"
-            *ngIf="getOlympicService().isLoaded()==true" class="mx-auto sm:mx-4 my-0 sm:my-0"></app-card>
+    <div *ngIf="this.dataLoaded" class="max-w-2 flex justify-center my-auto flex-col sm:flex-row">
+        <app-card [title]="'Number of entries'" [data]="this.numberOfentries" *ngIf="this.dataLoaded"
+            class="mx-auto sm:mx-4 my-0 sm:my-0"></app-card>
+        <app-card [title]="'Total number of medals'" [data]="this.numberOfMedals" *ngIf="this.dataLoaded"
+            class="mx-auto sm:mx-4 my-4 sm:my-0"></app-card>
+        <app-card [title]="'Total number of athletes'" [data]="this.numberOfAthletes" *ngIf="this.dataLoaded"
+            class="mx-auto sm:mx-4 my-0 sm:my-0"></app-card>
     </div>
-    <div *ngIf="getOlympicService().isLoaded()==true" class="flex justify-center m-10">
+    <div *ngIf="this.dataLoaded" class="flex justify-center m-10">
         <app-line-chart [dataId]="countryId"></app-line-chart>
     </div>
 
