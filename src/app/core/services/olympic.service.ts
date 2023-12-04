@@ -21,7 +21,12 @@ export class OlympicService {
   public errorMessage: String = '';
 
   constructor(private router: Router, private http: HttpClient) {}
-  //A commenter
+
+  /**
+   * Get the data from the server and load them into local
+   * variables. Throw exception in case of http error.
+   * Return an observable that emits the http response body
+   */
   loadInitialData() {
     return this.http.get<Country[]>(this.olympicUrl).pipe(
       tap((value) => {
@@ -36,7 +41,11 @@ export class OlympicService {
     );
   }
 
-  //A commenter
+  /**
+   * count the number of medals optained by each country for the
+   * pie chart display.
+   * @return array containing the medals count per country name.
+   */
   public buildPieChartData() {
     let medalsCount = [];
     try {
@@ -55,20 +64,24 @@ export class OlympicService {
     }
   }
 
-  //A commenter
+  /**
+   * Buld the line chart dataset
+   * @param id country id
+   * @returns Array containing the medals count per country name.
+   */
   public buildLineChartData(id?: number) {
     let dataset: LineChartData[] = [];
     let lineChartData = {} as LineChartData;
     let series: Serie[] = [];
     let objSerie = {} as Serie;
     try {
-      if (id == undefined) return null;
+      if (id == undefined) return null; //avoid exception in case of bad id
 
       for (let p of this.countries[id - 1].participations) {
         objSerie.name = p.year.toString();
         objSerie.value = p.medalsCount;
         series.push(objSerie);
-        objSerie = new Object() as Serie; //reinitialisation de la variable / nlle objet
+        objSerie = new Object() as Serie; //reinit variable with a new object
       }
       lineChartData.name = this.getCountryById(id);
       lineChartData.series = series;
@@ -102,7 +115,12 @@ export class OlympicService {
       throw error;
     }
   }
-  //A commenter
+
+  /**
+   * @param argId contry id
+   * @returns country name
+   */
+
   getCountryById(argId: number): String {
     try {
       for (let country of this.countries)
@@ -112,7 +130,12 @@ export class OlympicService {
       throw error;
     }
   }
-  //A commenter
+
+  /**
+   * @param ctryName name of the country
+   * @returns id of the country
+   */
+
   getIdByCountry(ctryName: String) {
     try {
       for (let country of this.countries)
@@ -122,7 +145,11 @@ export class OlympicService {
       throw error;
     }
   }
-  //A commenter
+  /**
+   * excract from the data the number of participation of a
+   * particular country
+   * @returns number of participation
+   */
   public getNumberOfGames() {
     try {
       let games: number[] = [];
@@ -136,7 +163,10 @@ export class OlympicService {
       throw error;
     }
   }
-  //A commenter
+  /**
+   *
+   * @returns totals medals of all countries
+   */
   getTotalMedals() {
     try {
       return this.pieChartData.reduce((acc, cur) => acc + cur.value, 0);
@@ -144,7 +174,12 @@ export class OlympicService {
       throw error;
     }
   }
-  //A commenter
+  /**
+   * excract from the data the number of athletes of a
+   * particular country
+   * @param id country Id
+   * @returns number of athletes sent to the males for a particular country
+   */
   getNumberOfAthletesById(id: number): number {
     try {
       if (this.countries.length != 0) {
@@ -158,7 +193,12 @@ export class OlympicService {
     }
     return 0;
   }
-  //A commenter
+  /**
+   * extract froma the pie chart dataset the number of medals obtained by a country
+   * @param id country id
+   * @returns the number of medals of a particular country
+   */
+
   getNumberOfMedalsById(id: number): number {
     try {
       if (this.pieChartData.length != 0) return this.pieChartData[id - 1].value;
@@ -167,12 +207,14 @@ export class OlympicService {
       throw error;
     }
   }
-  //A commenter
+  /**
+   * @param id: country id
+   * @returns number of participation of a country
+   */
   getNumberOfEntriesById(id: number): number {
     try {
-      console.log(id);
-      console.log(this.countries);
       if (this.countries.length != 0)
+        //avoid exception
         return this.countries[id - 1].participations.length;
       return 0;
     } catch (error) {

@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs';
 import { OlympicService } from './core/services/olympic.service';
-import {
-  BreakpointObserver,
-  Breakpoints,
-  BreakpointState,
-} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -13,23 +8,11 @@ import {
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  constructor(
-    public responsive: BreakpointObserver,
-    private olympicService: OlympicService
-  ) {}
+  constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
     try {
       this.olympicService.loadInitialData().pipe(take(1)).subscribe(); //unsubscribe automatically
-      this.responsive
-        .observe([Breakpoints.HandsetPortrait])
-        .subscribe((state: BreakpointState) => {
-          if (state.matches) {
-            console.log(
-              'This is the Handset Portrait point at max-width: 599.98 px and portrait orientation.'
-            );
-          }
-        });
     } catch (error) {
       throw error;
     }

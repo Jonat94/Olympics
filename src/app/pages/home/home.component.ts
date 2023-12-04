@@ -9,7 +9,6 @@ import { OlympicService } from '../../core/services/olympic.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  //public httpErrors: boolean = true;
   nbCountries: number = 0;
   dataLoaded: boolean = false;
   numberOfGames: number = 0;
@@ -23,22 +22,5 @@ export class HomeComponent implements OnInit {
       this.numberOfGames = this.olympicService.getNumberOfGames();
       this.totalMedals = this.olympicService.getTotalMedals();
     });
-
-    // this.olympicService.nbCountries$.subscribe(
-    //   (value) => (this.nbCountries = value)
-    // );
-
-    // this.olympicService.numberOfgames$.subscribe(
-    //   (value) => (this.numberOfGames = value)
-    // );
-
-    // this.olympicService.totalMedals$.subscribe(
-    //   (value) => (this.totalMedals = value)
-    // );
   }
-  /*
-  getOlympicService() {
-    return this.olympicService;
-  }
-  */
 }

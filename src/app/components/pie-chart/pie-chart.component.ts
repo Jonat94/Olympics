@@ -32,11 +32,9 @@ export class PieChartComponent implements OnInit {
       .observe(['(max-width: 640px)', '(min-width: 640px)'])
       .subscribe((result) => {
         if (this.responsive.isMatched('(max-width: 640px)')) {
-          console.log('screens matches 640px');
           this.chartView = [350, 350];
         }
         if (this.responsive.isMatched('(min-width: 640px)')) {
-          console.log('screens matches 640px');
           this.chartView = [500, 500];
         }
       });
