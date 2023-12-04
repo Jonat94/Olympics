@@ -15,8 +15,8 @@ export class GlobalErrorHandlerService implements ErrorHandler {
     } else {
       this.olympicService.errorMessage = this.getServerErrorMessage(error);
     }
-    this.router.navigate(['error']);
     console.error(error);
+    this.router.navigate(['error']);
   }
 
   private getServerErrorMessage(error: HttpErrorResponse): string {

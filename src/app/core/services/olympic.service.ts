@@ -12,7 +12,6 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class OlympicService {
-  //[x: string]: any;
   private olympicUrl = environment.baseUrl; //'./assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Country[] | null>(null);
   public nbCountries$ = new BehaviorSubject<number>(0);
@@ -44,7 +43,7 @@ export class OlympicService {
         // this.httpError = false;
       }),
       catchError((err) => {
-        this.olympics$.next(null);
+        //this.olympics$.next(null);
         return throwError(() => err);
       })
     );
@@ -171,18 +170,22 @@ export class OlympicService {
   //A commenter
   getNumberOfAthletesById(id: number): number {
     try {
-      return this.countries[id - 1].participations.reduce(
-        (acc, cur) => acc + cur.athleteCount,
-        0
-      );
+      if (this.countries.length != 0) {
+        return this.countries[id - 1].participations.reduce(
+          (acc, cur) => acc + cur.athleteCount,
+          0
+        );
+      }
     } catch (error) {
       throw error;
     }
+    return 0;
   }
   //A commenter
   getNumberOfMedalsById(id: number): number {
     try {
-      return this.pieChartData[id - 1].value;
+      if (this.pieChartData.length != 0) return this.pieChartData[id - 1].value;
+      return 0;
     } catch (error) {
       throw error;
     }
@@ -191,7 +194,10 @@ export class OlympicService {
   getNumberOfEntriesById(id: number): number {
     try {
       console.log(id);
-      return this.countries[id - 1].participations.length;
+      console.log(this.countries);
+      if (this.countries.length != 0)
+        return this.countries[id - 1].participations.length;
+      return 0;
     } catch (error) {
       throw error;
     }
