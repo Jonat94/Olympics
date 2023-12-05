@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { OlympicService } from '../../core/services/olympic.service';
 import { LineChartData } from '../../core/models/LineChartData';
-import { take } from 'rxjs';
+import { Observer, Subscription, take } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
@@ -9,11 +9,12 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   templateUrl: './line-chart.component.html',
   styleUrl: './line-chart.component.scss',
 })
-export class LineChartComponent implements OnInit {
+export class LineChartComponent implements OnInit, OnDestroy {
   @Input() dataId: number = 1;
   public dataset: LineChartData[] | null = [];
   dataLoaded: boolean = false;
   chartView: [number, number] = [600, 300];
+  subscription!: Subscription;
 
   constructor(
     private responsive: BreakpointObserver,
@@ -21,7 +22,7 @@ export class LineChartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.olympicService
+    this.subscription = this.olympicService
       .getOlympics()
       .pipe(take(1)) //unsubscribe automatique
       .subscribe(() => {
@@ -31,7 +32,7 @@ export class LineChartComponent implements OnInit {
 
     this.responsive
       .observe(['(max-width: 640px)', '(min-width: 640px)'])
-      .subscribe((result) => {
+      .subscribe(() => {
         if (this.responsive.isMatched('(max-width: 640px)')) {
           this.chartView = [350, 300];
         }
@@ -40,8 +41,11 @@ export class LineChartComponent implements OnInit {
         }
       });
   }
-
-  public getOlympicService() {
-    return this.olympicService;
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
+
+  // public getOlympicService() {
+  //   return this.olympicService;
+  // }
 }

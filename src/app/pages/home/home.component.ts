@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private olympicService: OlympicService) {}
   ngOnInit() {
+    //take(2) to avoid catching only an empty array in case of page reload.
     this.olympicService.dataLoaded$.pipe(take(2)).subscribe((value) => {
       this.dataLoaded = value;
       this.nbCountries = this.olympicService.getNumberOfCountries();

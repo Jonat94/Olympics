@@ -13,10 +13,6 @@ export class CardComponent implements OnInit {
   dataLoaded: boolean = false;
   constructor(private olympicService: OlympicService) {}
 
-  /*getOlympicService() {
-    return this.olympicService;
-  }*/
-
   ngOnInit(): void {
     //operator take to unsubscribe automaticaly
     this.olympicService.dataLoaded$.pipe(take(1)).subscribe((value) => {

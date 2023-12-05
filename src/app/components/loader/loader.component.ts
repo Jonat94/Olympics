@@ -10,10 +10,6 @@ export class LoaderComponent {
   public dataLoaded: boolean = false;
   constructor(private olympicService: OlympicService) {}
 
-  /*public getOlympicService() {
-    return this.olympicService;
-  }*/
-
   ngOnInit(): void {
     this.olympicService.dataLoaded$.subscribe((value) => {
       this.dataLoaded = value;

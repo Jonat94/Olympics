@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OlympicService } from '../../core/services/olympic.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-country',
@@ -20,13 +21,11 @@ export class CountryComponent implements OnInit {
     private olympicService: OlympicService
   ) {}
 
-  getOlympicService(): OlympicService {
-    return this.olympicService;
-  }
   ngOnInit(): void {
     this.countryId = +this.route.snapshot.params['id'];
 
-    this.olympicService.dataLoaded$.subscribe((value) => {
+    //take(2) to avoid catching only an empty array in case of page reload.
+    this.olympicService.dataLoaded$.pipe(take(2)).subscribe((value) => {
       this.dataLoaded = value;
       this.countryName = this.olympicService.getCountryById(this.countryId);
       this.numberOfentries = this.olympicService.getNumberOfEntriesById(

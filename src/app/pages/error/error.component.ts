@@ -10,7 +10,6 @@ import { OlympicService } from '../../core/services/olympic.service';
 export class ErrorComponent implements OnInit {
   constructor(private router: Router, private olympicService: OlympicService) {}
   ngOnInit(): void {
-    console.log(this.olympicService.errorMessage);
     if (this.olympicService.errorMessage == '') this.router.navigate(['']);
   }
 
