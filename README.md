@@ -1,4 +1,8 @@
+[![forthebadge](https://forthebadge.com/images/badges/cc-0.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com)
+
 # OlympicsV2
+
+Olympic is a front-end application designed to graphically present the results obtained at the Olympic Games by a set of countries. access to each country's data can be done locally via a Json file or through a REST API providing the same data structure.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
 
