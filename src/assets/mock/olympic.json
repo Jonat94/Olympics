@@ -32,21 +32,14 @@
     "participations": [
       {
         "id": 1,
-        "year": 2008,
-        "city": "Milan",
+        "year": 2017,
+        "city": "Londres",
         "medalsCount": 20,
         "athleteCount": 315
       },
       {
-        "id": 1,
-        "year": 2012,
-        "city": "Londres",
-        "medalsCount": 9,
-        "athleteCount": 315
-      },
-      {
         "id": 2,
-        "year": 2016,
+        "year": 2020,
         "city": "Rio de Janeiro",
         "medalsCount": 17,
         "athleteCount": 312
@@ -55,29 +48,8 @@
         "id": 3,
         "year": 2020,
         "city": "Tokyo",
-        "medalsCount": 19,
-        "athleteCount": 321
-      },
-      {
-        "id": 1,
-        "year": 2004,
-        "city": "Milan",
-        "medalsCount": 20,
-        "athleteCount": 315
-      },
-      {
-        "id": 1,
-        "year": 2000,
-        "city": "Londres",
-        "medalsCount": 9,
-        "athleteCount": 315
-      },
-      {
-        "id": 2,
-        "year": 1996,
-        "city": "Rio de Janeiro",
         "medalsCount": 17,
-        "athleteCount": 312
+        "athleteCount": 321
       }
     ]
   },
