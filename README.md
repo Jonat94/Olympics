@@ -16,5 +16,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## DataSet
 
-The data are included inside the `olympic.json` (/src/assets/mock/).
-You can find the base url for the data loading http request in the file environnements.ts located in /src/environnements/
+The data are included inside the `olympic.json` (`/src/assets/mock/`).
+You can find the base url for the data loading, http request, in the file `environnements.ts` located in `/src/environnements/`
+
+## Folder architecture
+
+- `components` folder: contains every reusable components
+- `pages` folder: contains components used for routing
+- `core` folder: contains the business logic (`services` and `models` folders)
