@@ -65,7 +65,7 @@ export class OlympicService {
   }
 
   /**
-   * Buld the line chart dataset
+   * Build the line chart dataset
    * @param id country id
    * @returns Array containing the medals count per country name.
    */
@@ -132,8 +132,8 @@ export class OlympicService {
   }
 
   /**
-   * @param ctryName name of the country
-   * @returns id of the country
+   * @param ctryName : name of the country
+   * @returns id : of the country
    */
 
   getIdByCountry(ctryName: String) {
@@ -146,7 +146,7 @@ export class OlympicService {
     }
   }
   /**
-   * excract from the data the number of participation of a
+   * exctract from the data the number of participation of a
    * particular country
    * @returns number of participation
    */

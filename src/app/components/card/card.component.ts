@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { take } from 'rxjs';
 import { OlympicService } from '../../core/services/olympic.service';
 
 @Component({
@@ -12,12 +13,13 @@ export class CardComponent implements OnInit {
   dataLoaded: boolean = false;
   constructor(private olympicService: OlympicService) {}
 
-  getOlympicService() {
+  /*getOlympicService() {
     return this.olympicService;
-  }
+  }*/
 
   ngOnInit(): void {
-    this.olympicService.dataLoaded$.subscribe((value) => {
+    //operator take to unsubscribe automaticaly
+    this.olympicService.dataLoaded$.pipe(take(1)).subscribe((value) => {
       this.dataLoaded = value;
     });
   }
