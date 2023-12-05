@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -16,9 +16,9 @@ export class OlympicService {
   private olympics$ = new BehaviorSubject<Country[] | null>(null);
   public dataLoaded$ = new BehaviorSubject<boolean>(false);
   private countries: Country[] = [];
-  private pieChartData: { name: String; value: number }[] = [];
+  private pieChartData: { name: string; value: number }[] = [];
   private lineChartData: LineChartData[] = [];
-  public errorMessage: String = '';
+  public errorMessage: string = '';
 
   constructor(private router: Router, private http: HttpClient) {}
 
@@ -47,21 +47,18 @@ export class OlympicService {
    * @return array containing the medals count per country name.
    */
   public buildPieChartData() {
-    let medalsCount = [];
-    try {
-      for (let c of this.countries) {
-        let obj = {} as Serie;
-        obj.value = c.participations.reduce(
-          (acc, cur) => acc + cur.medalsCount,
-          0
-        );
-        obj.name = c.country;
-        medalsCount.push(obj);
-      }
-      return medalsCount;
-    } catch (error) {
-      throw error;
+    const medalsCount = [];
+
+    for (const c of this.countries) {
+      const obj = {} as Serie;
+      obj.value = c.participations.reduce(
+        (acc, cur) => acc + cur.medalsCount,
+        0
+      );
+      obj.name = c.country;
+      medalsCount.push(obj);
     }
+    return medalsCount;
   }
 
   /**
@@ -70,50 +67,35 @@ export class OlympicService {
    * @returns Array containing the medals count per country name.
    */
   public buildLineChartData(id?: number) {
-    let dataset: LineChartData[] = [];
-    let lineChartData = {} as LineChartData;
-    let series: Serie[] = [];
+    const dataset: LineChartData[] = [];
+    const lineChartData = {} as LineChartData;
+    const series: Serie[] = [];
     let objSerie = {} as Serie;
-    try {
-      if (id == undefined) return null; //avoid exception in case of bad id
 
-      for (let p of this.countries[id - 1].participations) {
-        objSerie.name = p.year.toString();
-        objSerie.value = p.medalsCount;
-        series.push(objSerie);
-        objSerie = new Object() as Serie; //reinit variable with a new object
-      }
-      lineChartData.name = this.getCountryById(id);
-      lineChartData.series = series;
-      dataset.push(lineChartData);
-      return dataset;
-    } catch (error) {
-      throw error;
+    if (id == undefined) return null; //avoid exception in case of bad id
+
+    for (const p of this.countries[id - 1].participations) {
+      objSerie.name = p.year.toString();
+      objSerie.value = p.medalsCount;
+      series.push(objSerie);
+      objSerie = new Object() as Serie; //reinit variable with a new object
     }
+    lineChartData.name = this.getCountryById(id);
+    lineChartData.series = series;
+    dataset.push(lineChartData);
+    return dataset;
   }
 
   getLineChartData() {
-    try {
-      return this.lineChartData;
-    } catch (error) {
-      throw error;
-    }
+    return this.lineChartData;
   }
 
   getOlympics() {
-    try {
-      return this.olympics$.asObservable();
-    } catch (error) {
-      throw error;
-    }
+    return this.olympics$.asObservable();
   }
 
   getPieChartData() {
-    try {
-      return this.pieChartData;
-    } catch (error) {
-      throw error;
-    }
+    return this.pieChartData;
   }
 
   /**
@@ -121,14 +103,10 @@ export class OlympicService {
    * @returns country name
    */
 
-  getCountryById(argId: number): String {
-    try {
-      for (let country of this.countries)
-        if (country.id == argId) return country.country;
-      return '';
-    } catch (error) {
-      throw error;
-    }
+  getCountryById(argId: number): string {
+    for (const country of this.countries)
+      if (country.id == argId) return country.country;
+    return '';
   }
 
   /**
@@ -136,14 +114,10 @@ export class OlympicService {
    * @returns id : of the country
    */
 
-  getIdByCountry(ctryName: String) {
-    try {
-      for (let country of this.countries)
-        if (country.country == ctryName) return country.id;
-      return null;
-    } catch (error) {
-      throw error;
-    }
+  getIdByCountry(ctryName: string) {
+    for (const country of this.countries)
+      if (country.country == ctryName) return country.id;
+    return null;
   }
   /**
    * exctract from the data the number of participation of a
@@ -151,28 +125,19 @@ export class OlympicService {
    * @returns number of participation
    */
   public getNumberOfGames() {
-    try {
-      let games: number[] = [];
-      for (let country of this.countries)
-        for (let participation of country.participations) {
-          if (!games.includes(participation.year))
-            games.push(participation.year);
-        }
-      return games.length;
-    } catch (error) {
-      throw error;
-    }
+    const games: number[] = [];
+    for (const country of this.countries)
+      for (const participation of country.participations) {
+        if (!games.includes(participation.year)) games.push(participation.year);
+      }
+    return games.length;
   }
   /**
    *
    * @returns totals medals of all countries
    */
   getTotalMedals() {
-    try {
-      return this.pieChartData.reduce((acc, cur) => acc + cur.value, 0);
-    } catch (error) {
-      throw error;
-    }
+    return this.pieChartData.reduce((acc, cur) => acc + cur.value, 0);
   }
   /**
    * excract from the data the number of athletes of a
@@ -181,15 +146,11 @@ export class OlympicService {
    * @returns number of athletes sent to the males for a particular country
    */
   getNumberOfAthletesById(id: number): number {
-    try {
-      if (this.countries.length != 0) {
-        return this.countries[id - 1].participations.reduce(
-          (acc, cur) => acc + cur.athleteCount,
-          0
-        );
-      }
-    } catch (error) {
-      throw error;
+    if (this.countries.length != 0) {
+      return this.countries[id - 1].participations.reduce(
+        (acc, cur) => acc + cur.athleteCount,
+        0
+      );
     }
     return 0;
   }
@@ -200,33 +161,21 @@ export class OlympicService {
    */
 
   getNumberOfMedalsById(id: number): number {
-    try {
-      if (this.pieChartData.length != 0) return this.pieChartData[id - 1].value;
-      return 0;
-    } catch (error) {
-      throw error;
-    }
+    if (this.pieChartData.length != 0) return this.pieChartData[id - 1].value;
+    return 0;
   }
   /**
    * @param id: country id
    * @returns number of participation of a country
    */
   getNumberOfEntriesById(id: number): number {
-    try {
-      if (this.countries.length != 0)
-        //avoid exception
-        return this.countries[id - 1].participations.length;
-      return 0;
-    } catch (error) {
-      throw error;
-    }
+    if (this.countries.length != 0)
+      //avoid exception
+      return this.countries[id - 1].participations.length;
+    return 0;
   }
 
   getNumberOfCountries() {
-    try {
-      return this.countries.length;
-    } catch (error) {
-      throw error;
-    }
+    return this.countries.length;
   }
 }

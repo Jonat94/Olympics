@@ -1,5 +1,5 @@
 export interface Event {
-  name: String;
+  name: string;
   value: number;
-  label: String;
+  label: string;
 }

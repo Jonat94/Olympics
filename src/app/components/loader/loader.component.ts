@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OlympicService } from '../../core/services/olympic.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { OlympicService } from '../../core/services/olympic.service';
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss',
 })
-export class LoaderComponent {
+export class LoaderComponent implements OnInit {
   public dataLoaded: boolean = false;
   constructor(private olympicService: OlympicService) {}
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OlympicService } from '../../core/services/olympic.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ export class CountryComponent implements OnInit {
   public countryId!: number;
   public numberOfentries: number = 0;
   public dataLoaded: boolean = false;
-  public countryName: String = '';
+  public countryName: string = '';
   public numberOfMedals: number = 0;
   public numberOfAthletes: number = 0;
 

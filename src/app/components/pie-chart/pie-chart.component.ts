@@ -31,7 +31,7 @@ export class PieChartComponent implements OnInit, OnDestroy {
 
     this.subscription = this.responsive
       .observe(['(max-width: 640px)', '(min-width: 640px)'])
-      .subscribe((result) => {
+      .subscribe(() => {
         if (this.responsive.isMatched('(max-width: 640px)')) {
           this.chartView = [350, 350];
         }
@@ -42,7 +42,7 @@ export class PieChartComponent implements OnInit, OnDestroy {
   }
 
   onSelect($event: Event): void {
-    let obj = JSON.parse(JSON.stringify($event)); //used tobuild a javascript object from an unkon type object.
+    const obj = JSON.parse(JSON.stringify($event)); //used tobuild a javascript object from an unkon type object.
     this.router.navigate([
       `country/${this.olympicService.getIdByCountry(obj.name)}`,
     ]);

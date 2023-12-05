@@ -7,14 +7,10 @@ import { OlympicService } from './core/services/olympic.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
-    try {
-      this.olympicService.loadInitialData().pipe(take(1)).subscribe(); //unsubscribe automatically
-    } catch (error) {
-      throw error;
-    }
+    this.olympicService.loadInitialData().pipe(take(1)).subscribe(); //unsubscribe automatically
   }
 }

@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { OlympicService } from '../../core/services/olympic.service';
 import { LineChartData } from '../../core/models/LineChartData';
-import { Observer, Subscription, take } from 'rxjs';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Subscription, take } from 'rxjs';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-line-chart',

@@ -8,8 +8,8 @@ import { OlympicService } from '../../core/services/olympic.service';
   styleUrl: './card.component.scss',
 })
 export class CardComponent implements OnInit {
-  @Input() public data: Number | null = 0;
-  @Input() public title: String = '';
+  @Input() public data: number | null = 0;
+  @Input() public title: string = '';
   dataLoaded: boolean = false;
   constructor(private olympicService: OlympicService) {}
 
